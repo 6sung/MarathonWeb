@@ -33,14 +33,19 @@
 	<!-- 어노테이션을 이용한 트랜잭션 설정 -->
 	<tx:annotation-driven/>
 	
-	<!-- myBatis 설정 -->
-	<mybatis-spring:scan base-package="com.webteam.marathon.dao"/>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="mapperLocations" value="classpath:mapper/**/*.xml"/>
-	</bean>
+	<context:component-scan base-package="com.webteam.marathon.service"/>
+	<context:component-scan base-package="com.webteam.marathon.dao"/>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="*" rollback-for="java.lang.RuntimeException"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	
 	
 	<!-- 어노테이션 DI 설정 -->
-	<context:component-scan base-package="com.example.myapp.hr"></context:component-scan>
+	<context:component-scan base-package="com.webteam.marathon"></context:component-scan>
 		
 </beans>

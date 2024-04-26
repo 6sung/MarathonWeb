@@ -18,27 +18,11 @@ public class MarathonController {
 	
 	@GetMapping(value="/hr/delete")
 	public String deleteMarathon(int rcpnum, Model model) {
-	    model.addAttribute("rcp", marathonService.getReceiptInfo(rcpnum));
-	    return "hr/delete";
+	    return "";
 	}
 
 	@PostMapping(value="/hr/delete")
 	public String deleteMarathon(int rcpnum, String userpassword,RedirectAttributes redAttr, Model model) {
-		try {
-			int delete = marathonService.deleteMarathon(rcpnum,userpassword);
-			if(delete > 0) {
-				redAttr.addFlashAttribute("message","접수번호 "+rcpnum+"의 신청이 취소되었습니다.");
-				return "redirect:/hr/deleteform";//"redirect:/hr/list";
-			}
-			else {
-				model.addAttribute("message","접수번호 또는 비밀번호가 다릅니다");
-				//model.addAttribute("rcp",marathonService.getReceiptInfo(rcpnum, userpassword));
-				return "hr/deleteform";
-			}
-		}catch(RuntimeException e) {
-			model.addAttribute("message", e.getMessage());
-			//model.addAttribute("rcp",marathonService.getReceiptInfo(rcpnum, userpassword));
-			return "hr/deleteform";
-		}
+		return "";
 	}
 }
