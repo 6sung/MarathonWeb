@@ -30,14 +30,12 @@ public class MarathonService implements IMarathonService{
 
 	@Override
 	public List<Marathon> getMarathonList() {
-		// TODO Auto-generated method stub
-		return null;
+		return marathonRepository.getMarathonList();
 	}
 
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
-		// TODO Auto-generated method stub
-		return null;
+		return marathonRepository.getMarathonInfo(marathonId);
 	}
 
 	@Override

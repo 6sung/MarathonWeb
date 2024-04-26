@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+//import com.example.myapp.hr.dao.EmpRepository.EmpMapper;
 import com.webteam.marathon.dto.Marathon;
 import com.webteam.marathon.dto.Receipt;
 
@@ -37,17 +38,31 @@ public class MarathonRepository implements IMarathonRepository{
 		
 	}
 	
+	private class MarMapper implements RowMapper<Marathon>{
+		@Override
+		public Marathon mapRow(ResultSet rs, int rowNum) throws SQLException{
+			Marathon mar = new Marathon();
+			mar.setMarathonId(rs.getInt("marathon_id"));
+			mar.setMarathonName(rs.getString("marathon_name"));
+			mar.setMarathonMaximum(rs.getInt("marathon_maximum"));
+			mar.setMarathonDate(rs.getDate("marathon_date"));
+			return mar;
+		}
+	}
+	
 	@Override
 	public List<Marathon> getMarathonList() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from marathon";
+		return jdbcTemplate.query(sql, new MarMapper());
 	}
 
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql= "SELECT marathon_id, marathon_name, marathon_maximum, "
+				+"marathon_date from marathon where marathon_id=?";
+		return jdbcTemplate.queryForObject(sql, new MarMapper(),marathonId);
 	}
+
 
 	@Override
 	public Receipt getReceiptInfo(int receiptNum) {
