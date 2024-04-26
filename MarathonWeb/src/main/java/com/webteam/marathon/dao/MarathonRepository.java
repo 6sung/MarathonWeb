@@ -3,14 +3,17 @@ package com.webteam.marathon.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.webteam.marathon.dto.Marathon;
 import com.webteam.marathon.dto.Receipt;
+import com.webteam.marathon.dto.ReceiptHistory;
 
 @Repository
 public class MarathonRepository implements IMarathonRepository{
@@ -65,13 +68,25 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public Receipt getReceiptHistory(int receiptNum, String userPassword) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReceiptHistory getReceiptHistory(int receiptNum, String userPassword) {
+		String sql = "SELECT m.marathon_name, m.marathon_date, r.receipt_num, "
+				+ "r.user_name, r.phone_num, " 
+				+ "r.user_add, r.user_email, r.user_birth "
+				+ "FROM marathon m JOIN receipt r "
+				+ "ON r.marathon_id = m.marathon_id "
+				+ "WHERE r.receipt_num = ? AND r.user_password =?";
+		return jdbcTemplate.queryForObject(sql, new RowMapper<ReceiptHistory>() {
+			@Override
+			public ReceiptHistory mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Receipt receipt = (new BeanPropertyRowMapper<>(Receipt.class)).mapRow(rs, rowNum);
+				Marathon marathon = (new BeanPropertyRowMapper<>(Marathon.class)).mapRow(rs, rowNum);
+				
+			}
+		}, receiptNum, userPassword);
 	}
 
 	@Override
-	public void updateMarathon(Marathon marathon) {
+	public void updateReceipt(ReceiptHistory rcpHistory) {
 		// TODO Auto-generated method stub
 		
 	}
