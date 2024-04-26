@@ -24,8 +24,8 @@ public class MarathonService implements IMarathonService{
 	}
 
 	@Override
-	public Receipt getReceiptInfo(int receiptNum) {
-		return marathonRepository.getReceiptInfo(receiptNum);
+	public Receipt getReceiptInfoNum(int receiptNum) {
+		return marathonRepository.getReceiptInfoNum(receiptNum);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class MarathonService implements IMarathonService{
 
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -56,6 +56,11 @@ public class MarathonService implements IMarathonService{
 	public void updateMarathon(Marathon marathon) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Receipt getReceiptInfo(String userName, String phoneNum) {
+		return marathonRepository.getReceiptInfo(userName, phoneNum);
 	}
 	
 	

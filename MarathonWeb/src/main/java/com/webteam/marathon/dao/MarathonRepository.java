@@ -50,7 +50,7 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public Receipt getReceiptInfo(int receiptNum) {
+	public Receipt getReceiptInfoNum(int receiptNum) {
 		String sql = "SELECT receipt_num, user_name, phone_num, user_add, "
 				+ " user_email, user_birth, marathon_id, user_password "
 				+ " FROM receipt WHERE receipt_num=?";
@@ -82,5 +82,13 @@ public class MarathonRepository implements IMarathonRepository{
 		String sql = "DELETE FROM receipt WHERE receipt_num=? AND user_password=?";
 		return jdbcTemplate.update(sql,receiptNum,userPassword);
 
+	}
+
+	@Override
+	public Receipt getReceiptInfo(String userName, String phoneNum) {
+		String sql = "SELECT receipt_num, user_name, phone_num, user_add, "
+				+ " user_email, user_birth, marathon_id, user_password "
+				+ " FROM receipt WHERE user_name=? AND phone_num=?";
+		return jdbcTemplate.queryForObject(sql, new RcpMapper(), userName, phoneNum);
 	}
 }

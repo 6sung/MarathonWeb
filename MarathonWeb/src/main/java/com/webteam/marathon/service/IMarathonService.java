@@ -11,8 +11,10 @@ public interface IMarathonService {
 		// 대회 상세정보 가져오기
 		Marathon getMarathonInfo(int marathonId);
 		
-		// 접수 내역 조회
-		Receipt getReceiptInfo(int receiptNum);
+		// 접수 내역 조회 접수번호
+		Receipt getReceiptInfoNum(int receiptNum);
+		// 접수내역 이름+전화번호
+		Receipt getReceiptInfo(String userName, String phoneNum);
 		
 		// 접수하기
 		void insertMarathon(Marathon marathon);
