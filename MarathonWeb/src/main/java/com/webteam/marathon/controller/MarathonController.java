@@ -19,8 +19,8 @@ public class MarathonController {
 	@Autowired
 	IMarathonService marathonService;
 	
-	//해당 마라톤아이디를 입력하면 마라톤 아이디에 해당하는 정보가 나옵니ㅏㄷ
-	@GetMapping("/marform/{marathonId}")
+	//해당 마라톤아이디를 입력하면 마라톤 아이디에 해당하는 정보가 나옵니다
+	@GetMapping("/{marathonId}")
 	public String getMarathonInfo(@PathVariable int marathonId, Model model) {
 		Marathon marathon=marathonService.getMarathonInfo(marathonId);
 		model.addAttribute("marathon", marathon);
@@ -28,8 +28,8 @@ public class MarathonController {
 	}
 	//테스트 시 http://localhost:8080/marathon/marform/list 로 입력
 	//마라톤 리스트가 출력됩니다.
-	@GetMapping("/marform/list")
-	public String getAllMars(Model model) {
+	@GetMapping("/list")
+	public String getAllMarathon(Model model) {
 		List<Marathon> marathonList=marathonService.getMarathonList();
 		model.addAttribute("marathonList",marathonList);
 		return "marathon/index";
