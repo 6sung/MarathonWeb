@@ -37,8 +37,6 @@ public class MarathonService implements IMarathonService{
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
 		return marathonRepository.getMarathonInfo(marathonId);
-		
-		return null;
 	}
 
 	@Override

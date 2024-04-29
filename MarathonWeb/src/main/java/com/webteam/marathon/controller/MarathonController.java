@@ -42,7 +42,7 @@ public class MarathonController {
 	
 	/**
 	 * @author 표기두
-	 * @param rcpNum - 접수 번호 
+	 * @param receiptNum - 접수 번호 
 	 * @param userPassword - 접수 비밀번호
 	 * @param model - 접수 DTO
 	 * @return
@@ -63,7 +63,6 @@ public class MarathonController {
 		}
 		return "redirect:/";
 	}
-}
 	@GetMapping(value="/result/delete")
 	public String deleteMarathon(Model model) {
 	    return "result/deleteform";
