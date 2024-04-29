@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 @Setter @Getter @ToString
-public class ReceiptHistory {
+public class NewReceipt {
 	private String marathonName;
 	private Date marathonDate;
 	private int receiptNum;

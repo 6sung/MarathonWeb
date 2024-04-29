@@ -3,7 +3,7 @@ import java.util.List;
 
 import com.webteam.marathon.dto.Marathon;
 import com.webteam.marathon.dto.Receipt;
-import com.webteam.marathon.dto.ReceiptHistory;
+import com.webteam.marathon.dto.NewReceipt;
 
 public interface IMarathonService {
 	// 마라톤 대회 목록 가져오기
@@ -21,10 +21,10 @@ public interface IMarathonService {
 		void insertMarathon(Marathon marathon);
 		
 		// 접수 내역 수정 페이지
-		ReceiptHistory getReceiptHistory(int receiptNum, String userPassword);
+		NewReceipt getNewReceipt(int receiptNum, String userPassword);
 		
 		// 접수 내역 수정 
-		void updateMarathon(Marathon marathon);
+		void updateReceipt(Receipt newReceipt, int receiptNum);
 		
 		// 접수 내역 삭제
 		int deleteMarathon(int receiptNum, String userPassword);

@@ -10,7 +10,7 @@ import com.webteam.marathon.dao.IMarathonRepository;
 import com.webteam.marathon.dao.MarathonRepository;
 import com.webteam.marathon.dto.Marathon;
 import com.webteam.marathon.dto.Receipt;
-import com.webteam.marathon.dto.ReceiptHistory;
+import com.webteam.marathon.dto.NewReceipt;
 
 @Service
 public class MarathonService implements IMarathonService{
@@ -48,14 +48,13 @@ public class MarathonService implements IMarathonService{
 	}
 
 	@Override
-	public ReceiptHistory getReceiptHistory(int receiptNum, String userPassword) {
-		return marathonRepository.getReceiptHistory(receiptNum, userPassword);
+	public NewReceipt getNewReceipt(int receiptNum, String userPassword) {
+		return marathonRepository.getNewReceipt(receiptNum, userPassword);
 	}
 
 	@Override
-	public void updateMarathon(Marathon marathon) {
-		// TODO Auto-generated method stub
-		
+	public void updateReceipt(Receipt newReceipt, int receiptNum) {
+		marathonRepository.updateReceipt(newReceipt, receiptNum);
 	}
 
 	@Override
