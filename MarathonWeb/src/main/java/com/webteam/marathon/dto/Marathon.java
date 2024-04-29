@@ -1,5 +1,7 @@
 package com.webteam.marathon.dto;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,6 +10,6 @@ import lombok.ToString;
 public class Marathon {
 	private int marathonId;
 	private String marathonName;
-	private int marathonMaxNum;
-	private int marathonDate;
+	private int marathonMaximum;
+	private Date marathonDate;
 }

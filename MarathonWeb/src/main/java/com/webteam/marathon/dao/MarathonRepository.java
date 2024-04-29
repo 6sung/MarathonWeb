@@ -19,7 +19,6 @@ public class MarathonRepository implements IMarathonRepository{
 	JdbcTemplate jdbcTemplate;
 	
 	private class RcpMapper implements RowMapper<Receipt>{
-
 		@Override
 		public Receipt mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// TODO Auto-generated method stub
@@ -34,19 +33,31 @@ public class MarathonRepository implements IMarathonRepository{
 			rcp.setUserPassword(rs.getString("user_password"));
 			return rcp;
 		}
-		
+	}
+	
+	private class MarMapper implements RowMapper<Marathon>{
+		@Override
+		public Marathon mapRow(ResultSet rs, int rowNum) throws SQLException{
+			Marathon mar = new Marathon();
+			mar.setMarathonId(rs.getInt("marathon_id"));
+			mar.setMarathonName(rs.getString("marathon_name"));
+			mar.setMarathonMaximum(rs.getInt("marathon_maximum"));
+			mar.setMarathonDate(rs.getDate("marathon_date"));
+			return mar;
+		}
 	}
 	
 	@Override
 	public List<Marathon> getMarathonList() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from marathon";
+		return jdbcTemplate.query(sql, new MarMapper());
 	}
 
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql= "SELECT marathon_id, marathon_name, marathon_maximum, "
+				+"marathon_date from marathon where marathon_id=?";
+		return jdbcTemplate.queryForObject(sql, new MarMapper(),marathonId);
 	}
 
 	@Override
@@ -78,9 +89,10 @@ public class MarathonRepository implements IMarathonRepository{
 
 	@Override
 	public int deleteMarathon(int receiptNum, String userPassword) {
-		// TODO Auto-generated method stub
+		//String sql = "delete from employees where employee_id=? and email=?";
+		//String sql = "select * from receipt where receipt_num=? and user_password=?";
 		String sql = "DELETE FROM receipt WHERE receipt_num=? AND user_password=?";
+		//return receiptNum;
 		return jdbcTemplate.update(sql,receiptNum,userPassword);
-
 	}
 }

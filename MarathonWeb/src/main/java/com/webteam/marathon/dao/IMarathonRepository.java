@@ -26,5 +26,4 @@ public interface IMarathonRepository {
 	
 	// 접수 내역 삭제
 	int deleteMarathon(int receiptNum, String userPassword);
-	
 }
