@@ -12,12 +12,12 @@ public interface IMarathonService {
 		Marathon getMarathonInfo(int marathonId);
 		
 		// 접수 내역 조회 접수번호
-		Receipt getReceiptInfoNum(int receiptNum);
+		Receipt getReceiptInfo(int receiptNum);
 		// 접수내역 이름+전화번호
 		Receipt getReceiptInfo(String userName, String phoneNum);
 		
 		// 접수하기
-		void insertMarathon(Marathon marathon);
+		void insertReceipt(Receipt receipt);
 		
 		// 접수 내역 수정 페이지
 		Receipt getReceiptHistory(int receiptNum, String userPassword);
@@ -27,4 +27,6 @@ public interface IMarathonService {
 		
 		// 접수 내역 삭제
 		int deleteMarathon(int receiptNum, String userPassword);
+
+		
 }

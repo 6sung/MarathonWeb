@@ -37,20 +37,33 @@ public class MarathonRepository implements IMarathonRepository{
 		
 	}
 	
+	private class MarMapper implements RowMapper<Marathon>{
+		@Override
+		public Marathon mapRow(ResultSet rs, int rowNum) throws SQLException{
+			Marathon mar = new Marathon();
+			mar.setMarathonId(rs.getInt("marathon_id"));
+			mar.setMarathonName(rs.getString("marathon_name"));
+			mar.setMarathonMaxNum(rs.getInt("marathon_maximum"));
+			mar.setMarathonDate(rs.getDate("marathon_date"));
+			return mar;
+		}
+	}
+	
 	@Override
 	public List<Marathon> getMarathonList() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from marathon";
+		return jdbcTemplate.query(sql, new MarMapper());
 	}
 
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql= "SELECT marathon_id, marathon_name, marathon_maximum, "
+				+"marathon_date from marathon where marathon_id=?";
+		return jdbcTemplate.queryForObject(sql, new MarMapper(),marathonId);
 	}
 
 	@Override
-	public Receipt getReceiptInfoNum(int receiptNum) {
+	public Receipt getReceiptInfo(int receiptNum) {
 		String sql = "SELECT receipt_num, user_name, phone_num, user_add, "
 				+ " user_email, user_birth, marathon_id, user_password "
 				+ " FROM receipt WHERE receipt_num=?";
@@ -59,9 +72,20 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public void insertMarathon(Marathon marathon) {
-		// TODO Auto-generated method stub
-		
+	public void insertReceipt(Receipt receipt) {
+		String sql = "insert into receipt (RECEIPT_NUM, USER_NAME, PHONE_NUM, USER_ADD, " + 
+				"				USER_EMAIL, USER_BIRTH, MARATHON_ID, USER_PASSWORD) " + 
+				"				 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, 
+				receipt.getReceiptNum(),
+				receipt.getUserName(),
+				receipt.getPhoneNum(),
+				receipt.getUserAdd(),
+				receipt.getUserEmail(),
+				receipt.getUserBirth(),
+				receipt.getMarathonId(),
+				receipt.getUserPassword()
+				);
 	}
 
 	@Override
@@ -90,5 +114,11 @@ public class MarathonRepository implements IMarathonRepository{
 				+ " user_email, user_birth, marathon_id, user_password "
 				+ " FROM receipt WHERE user_name=? AND phone_num=?";
 		return jdbcTemplate.queryForObject(sql, new RcpMapper(), userName, phoneNum);
+	}
+
+	@Override
+	public Receipt getReceiptInfoNum(int receiptNum) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

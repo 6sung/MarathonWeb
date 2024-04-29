@@ -24,26 +24,24 @@ public class MarathonService implements IMarathonService{
 	}
 
 	@Override
-	public Receipt getReceiptInfoNum(int receiptNum) {
-		return marathonRepository.getReceiptInfoNum(receiptNum);
+	public Receipt getReceiptInfo(int receiptNum) {
+		return marathonRepository.getReceiptInfo(receiptNum);
 	}
 
 	@Override
 	public List<Marathon> getMarathonList() {
-		// TODO Auto-generated method stub
-		return null;
+		return marathonRepository.getMarathonList();
 	}
 
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
-		
-		return null;
+		return marathonRepository.getMarathonInfo(marathonId);
 	}
 
 	@Override
-	public void insertMarathon(Marathon marathon) {
-		// TODO Auto-generated method stub
-		
+	public void insertReceipt(Receipt receipt) {
+		System.out.println("4번");
+		marathonRepository.insertReceipt(receipt);
 	}
 
 	@Override
@@ -60,9 +58,14 @@ public class MarathonService implements IMarathonService{
 
 	@Override
 	public Receipt getReceiptInfo(String userName, String phoneNum) {
-		return marathonRepository.getReceiptInfo(userName, phoneNum);
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+		
 	}
 	
 	
 
-}
+
