@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.webteam.marathon.dao.IMarathonRepository;
 import com.webteam.marathon.dao.MarathonRepository;
 import com.webteam.marathon.dto.Marathon;
+import com.webteam.marathon.dto.NewReceipt;
 import com.webteam.marathon.dto.Receipt;
 
 @Service
@@ -24,8 +25,8 @@ public class MarathonService implements IMarathonService{
 	}
 
 	@Override
-	public Receipt getReceiptInfo(int receiptNum) {
-		return marathonRepository.getReceiptInfo(receiptNum);
+	public List<Receipt> getReceiptInfo(String userName, String phoneNum) {
+		return marathonRepository.getReceiptInfo(userName, phoneNum);
 	}
 
 	@Override
@@ -39,9 +40,9 @@ public class MarathonService implements IMarathonService{
 	}
 
 	@Override
-	public void insertMarathon(Marathon marathon) {
-		// TODO Auto-generated method stub
-		
+	public void insertReceipt(Receipt receipt) {
+		//System.out.println("4번");
+		marathonRepository.insertReceipt(receipt);
 	}
 
 	@Override
@@ -49,9 +50,14 @@ public class MarathonService implements IMarathonService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	@Override
-	public void updateMarathon(Marathon marathon) {
-		// TODO Auto-generated method stub
-		
+	public NewReceipt getNewReceipt(int receiptNum, String userPassword) {
+		return marathonRepository.getNewReceipt(receiptNum, userPassword);
+	}
+	
+	@Override
+	public void updateReceipt(Receipt newReceipt, int receiptNum) {
+		marathonRepository.updateReceipt(newReceipt, receiptNum);
 	}
 }

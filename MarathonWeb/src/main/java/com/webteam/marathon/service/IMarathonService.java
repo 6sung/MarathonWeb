@@ -2,6 +2,7 @@ package com.webteam.marathon.service;
 import java.util.List;
 
 import com.webteam.marathon.dto.Marathon;
+import com.webteam.marathon.dto.NewReceipt;
 import com.webteam.marathon.dto.Receipt;
 
 public interface IMarathonService {
@@ -12,16 +13,17 @@ public interface IMarathonService {
 		Marathon getMarathonInfo(int marathonId);
 		
 		// 접수 내역 조회
-		Receipt getReceiptInfo(int receiptNum);
+		List<Receipt> getReceiptInfo(String userName, String phoneNum);
 		
 		// 접수하기
-		void insertMarathon(Marathon marathon);
+		void insertReceipt(Receipt receipt);
 		
 		// 접수 내역 수정 페이지
 		Receipt getReceiptHistory(int receiptNum, String userPassword);
 		
 		// 접수 내역 수정 
-		void updateMarathon(Marathon marathon);
+		void updateReceipt(Receipt newReceipt, int receiptNum);
+		NewReceipt getNewReceipt(int receiptNum, String userPassword);
 		
 		// 접수 내역 삭제
 		int deleteMarathon(int receiptNum, String userPassword);

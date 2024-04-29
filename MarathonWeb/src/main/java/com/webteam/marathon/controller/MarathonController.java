@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webteam.marathon.dto.Marathon;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 import com.webteam.marathon.dto.Receipt;
@@ -20,6 +23,61 @@ import com.webteam.marathon.service.IMarathonService;
 public class MarathonController {
 	@Autowired
 	IMarathonService marathonService;
+	
+	@GetMapping("/receipt/insert")
+	public String insertReceipt(Model model) {
+		model.addAttribute("marathonList", marathonService.getMarathonList());
+		System.out.println("1번");
+		return "receipt/insert";
+	}
+
+	@PostMapping(value="/receipt/insert")
+	public String insertReceipt(Receipt receipt, RedirectAttributes redirectAttrs) {
+			System.out.println(receipt.toString());
+			try {
+				marathonService.insertReceipt(receipt);
+				redirectAttrs.addFlashAttribute("message", receipt.getUserName() + "님 참가 신청이 완료되었습니다.");
+				System.out.println("2번");
+			}catch(RuntimeException e) {
+				redirectAttrs.addFlashAttribute("message", e.getMessage());
+				e.printStackTrace();
+				System.out.println("3번");
+			}
+			return "redirect:/receipt/insert";
+	}
+	
+	@GetMapping("/result/info5")
+	public String getReceiptInfo(Model model) {
+	        return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지 
+	}
+	@PostMapping("/result/info5")
+	public String getReceiptInfo(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "phoneNum", required = false) String phoneNum, Model model) {
+		try {
+		    List<Receipt> receipts = marathonService.getReceiptInfo(userName, phoneNum);
+		    model.addAttribute("receipts", receipts);
+		    return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지
+		} catch (EmptyResultDataAccessException e) {
+		    model.addAttribute("errorMessage", "영수증 정보를 찾을 수 없습니다.");
+		    return "result/noinfo2"; // 오류 메시지를 표시하는 JSP 페이지
+		}
+	}
+	
+	@GetMapping(value="/update/{receiptNum}/{userPassword}")
+	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model) {
+		model.addAttribute("newReceipt", marathonService.getNewReceipt(receiptNum, userPassword));
+		return "updateform";
+	}
+	
+	@PostMapping(value="/update/{receiptNum}/{userPassword}")
+	public String updateReceipt(Receipt newReceipt,@PathVariable int receiptNum, @PathVariable String userPassword, RedirectAttributes model) {
+		try {
+			marathonService.updateReceipt(newReceipt, receiptNum);
+			model.addFlashAttribute("message", "접수 내역이 수정되었습니다");
+		} catch (RuntimeException e) {
+			model.addFlashAttribute("message", e.getMessage());
+		}
+		return "redirect:/";
+	}
 	
 	@GetMapping("/{marathonId}")
 	public String getMarathonInfo(@PathVariable int marathonId, Model model) {

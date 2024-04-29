@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.webteam.marathon.dto.Marathon;
+import com.webteam.marathon.dto.NewReceipt;
 import com.webteam.marathon.dto.Receipt;
 
 @Repository
@@ -61,18 +62,28 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public Receipt getReceiptInfo(int receiptNum) {
+	public List<Receipt> getReceiptInfo(String userName, String phoneNum) {
 		String sql = "SELECT receipt_num, user_name, phone_num, user_add, "
 				+ " user_email, user_birth, marathon_id, user_password "
-				+ " FROM receipt WHERE receipt_num=?";
-		return jdbcTemplate.queryForObject(sql, new RcpMapper(), receiptNum);
-
+				+ " FROM receipt WHERE user_name=? AND phone_num=?";
+		return jdbcTemplate.query(sql, new RcpMapper(), userName, phoneNum);
 	}
 
 	@Override
-	public void insertMarathon(Marathon marathon) {
-		// TODO Auto-generated method stub
-		
+	public void insertReceipt(Receipt receipt) {
+		String sql = "insert into receipt (RECEIPT_NUM, USER_NAME, PHONE_NUM, USER_ADD, " + 
+				"				USER_EMAIL, USER_BIRTH, MARATHON_ID, USER_PASSWORD) " + 
+				"				 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, 
+				receipt.getReceiptNum(),
+				receipt.getUserName(),
+				receipt.getPhoneNum(),
+				receipt.getUserAdd(),
+				receipt.getUserEmail(),
+				receipt.getUserBirth(),
+				receipt.getMarathonId(),
+				receipt.getUserPassword()
+				);
 	}
 
 	@Override
@@ -82,9 +93,12 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public void updateMarathon(Marathon marathon) {
-		// TODO Auto-generated method stub
-		
+	public void updateReceipt(Receipt newReceipt, int receiptNum) {
+		String sql = "UPDATE receipt SET user_name=?, phone_num=?, user_add=?, user_email=?, "
+				+ "user_birth=? WHERE receipt_num= ?";
+		jdbcTemplate.update(sql, 
+				newReceipt.getUserName(), newReceipt.getPhoneNum(), newReceipt.getUserAdd(),
+				newReceipt.getUserEmail(), newReceipt.getUserBirth(), receiptNum);
 	}
 
 	@Override
@@ -94,5 +108,33 @@ public class MarathonRepository implements IMarathonRepository{
 		String sql = "DELETE FROM receipt WHERE receipt_num=? AND user_password=?";
 		//return receiptNum;
 		return jdbcTemplate.update(sql,receiptNum,userPassword);
+	}
+
+	@Override
+	public NewReceipt getNewReceipt(int receiptNum, String userPassword) {
+		String sql = "SELECT m.marathon_name, m.marathon_date, r.receipt_num, "
+				+ "r.user_name, r.phone_num, " 
+				+ "r.user_add, r.user_email, r.user_birth "
+				+ "FROM marathon m JOIN receipt r "
+				+ "ON r.marathon_id = m.marathon_id "
+				+ "WHERE r.receipt_num = ? AND r.user_password =?";
+		return jdbcTemplate.queryForObject(sql, new RowMapper<NewReceipt>() {
+
+			@Override
+			public NewReceipt mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
+				NewReceipt newReceipt = new NewReceipt();
+				newReceipt.setMarathonName(rs.getString("marathon_name"));
+				newReceipt.setMarathonDate(rs.getDate("marathon_date"));
+				newReceipt.setReceiptNum(rs.getInt("receipt_num"));
+				newReceipt.setUserName(rs.getString("user_name"));
+				newReceipt.setPhoneNum(rs.getString("phone_num"));
+				newReceipt.setUserAdd(rs.getString("user_add"));
+				newReceipt.setUserEmail(rs.getString("user_email"));
+				newReceipt.setUserBirth(rs.getString("user_birth"));
+				return newReceipt;
+			}
+			
+		}, receiptNum, userPassword);
 	}
 }
