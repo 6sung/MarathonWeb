@@ -17,7 +17,7 @@ public class MarathonService implements IMarathonService{
 	
 	@Autowired
 	IMarathonRepository marathonRepository;
-
+	
 	@Override
 	@Transactional("transactionManager")
 	public int deleteMarathon(int receiptNum, String userPassword) {
@@ -31,12 +31,12 @@ public class MarathonService implements IMarathonService{
 
 	@Override
 	public List<Marathon> getMarathonList() {
-		// TODO Auto-generated method stub
-		return null;
+		return marathonRepository.getMarathonList();
 	}
 
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
+		return marathonRepository.getMarathonInfo(marathonId);
 		
 		return null;
 	}
@@ -51,7 +51,6 @@ public class MarathonService implements IMarathonService{
 	public NewReceipt getNewReceipt(int receiptNum, String userPassword) {
 		return marathonRepository.getNewReceipt(receiptNum, userPassword);
 	}
-
 	@Override
 	public void updateReceipt(Receipt newReceipt, int receiptNum) {
 		marathonRepository.updateReceipt(newReceipt, receiptNum);
@@ -61,7 +60,4 @@ public class MarathonService implements IMarathonService{
 	public Receipt getReceiptInfo(String userName, String phoneNum) {
 		return marathonRepository.getReceiptInfo(userName, phoneNum);
 	}
-	
-	
-
 }

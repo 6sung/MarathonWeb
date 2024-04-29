@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.RedirectViewControllerRegistration;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.webteam.marathon.dto.Marathon;
+import java.util.List;
 
 import com.webteam.marathon.dto.Receipt;
 import com.webteam.marathon.dto.NewReceipt;
@@ -20,14 +25,19 @@ public class MarathonController {
 	@Autowired
 	IMarathonService marathonService;
 	
-	@GetMapping(value="/hr/delete")
-	public String deleteMarathon(int rcpnum, Model model) {
-	    return "";
+	@GetMapping("/{marathonId}")
+	public String getMarathonInfo(@PathVariable int marathonId, Model model) {
+		Marathon marathon=marathonService.getMarathonInfo(marathonId);
+		model.addAttribute("marathon", marathon);
+		return "marathon/view";
 	}
-
-	@PostMapping(value="/hr/delete")
-	public String deleteMarathon(int rcpnum, String userpassword,RedirectAttributes redAttr, Model model) {
-		return "";
+	//테스트 시 http://localhost:8080/marathon/list 로 입력
+	//마라톤 리스트가 출력됩니다.
+	@GetMapping("/list")
+	public String getAllMarathon(Model model) {
+		List<Marathon> marathonList=marathonService.getMarathonList();
+		model.addAttribute("marathonList",marathonList);
+		return "marathon/index";
 	}
 	
 	/**
@@ -52,5 +62,32 @@ public class MarathonController {
 			model.addFlashAttribute("message", e.getMessage());
 		}
 		return "redirect:/";
+	}
+}
+	@GetMapping(value="/result/delete")
+	public String deleteMarathon(Model model) {
+	    return "result/deleteform";
+	}
+	@GetMapping("/result/deleteform")
+	public String showDeleteForm() {
+	    return "result/deleteform";
+	}
+	@RequestMapping(value="/result/delete", method = RequestMethod.POST)
+	public String deleteMarathon(@RequestParam(required = true) Integer rcpnum, 
+	                             @RequestParam(required = true) String userpassword, 
+	                             RedirectAttributes redAttr, Model model){
+	    try{
+	        int delete = marathonService.deleteMarathon(rcpnum, userpassword);
+	        if(delete > 0){
+	            redAttr.addFlashAttribute("message", "접수번호 [" + rcpnum + "] 신청이 취소되었습니다.");
+	            return "redirect:/result/deleteform";
+	        }else{
+	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
+	            return "/result/deleteform";
+	        }
+	    }catch(Exception e){
+	        redAttr.addFlashAttribute("message", "삭제 중 오류가 발생했습니다: " + e.getMessage());
+	        return "redirect:/result/deleteform";
+	    }
 	}
 }

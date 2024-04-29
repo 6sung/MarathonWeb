@@ -10,6 +10,6 @@ import lombok.ToString;
 public class Marathon {
 	private int marathonId;
 	private String marathonName;
-	private int marathonMaxNum;
+	private int marathonMaximum;
 	private Date marathonDate;
 }
