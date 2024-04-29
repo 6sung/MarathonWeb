@@ -68,7 +68,7 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
 <div class="card">
 <div class="card-header">Register</div>
 <div class="card-body">
-<form name="my-form"  action="/marathon/receipt/insert" method="post">
+<form name="my-form"  action="/receipt/insert" method="post">
 <div class="form-group row">
 						
 <select class="Marathon_name" aria-label="Disabled select example">

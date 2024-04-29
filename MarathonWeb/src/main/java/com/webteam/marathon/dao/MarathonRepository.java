@@ -87,12 +87,6 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public Receipt getReceiptHistory(int receiptNum, String userPassword) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void updateReceipt(Receipt newReceipt, int receiptNum) {
 		String sql = "UPDATE receipt SET user_name=?, phone_num=?, user_add=?, user_email=?, "
 				+ "user_birth=? WHERE receipt_num= ?";

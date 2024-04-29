@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webteam.marathon.dto.Marathon;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 import com.webteam.marathon.dto.Receipt;
@@ -24,6 +22,11 @@ public class MarathonController {
 	@Autowired
 	IMarathonService marathonService;
 	
+	/**
+	 * @author 정다현
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/receipt/insert")
 	public String insertReceipt(Model model) {
 		model.addAttribute("marathonList", marathonService.getMarathonList());
@@ -46,6 +49,11 @@ public class MarathonController {
 			return "redirect:/receipt/insert";
 	}
 	
+	/**
+	 * @author 윤상기
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/result/info5")
 	public String getReceiptInfo(Model model) {
 	        return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지 
@@ -62,13 +70,26 @@ public class MarathonController {
 		}
 	}
 	
-	@GetMapping(value="/update/{receiptNum}/{userPassword}")
-	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model) {
-		model.addAttribute("newReceipt", marathonService.getNewReceipt(receiptNum, userPassword));
-		return "updateform";
+	
+	/**
+	 * @author 표기두
+	 * @param receiptNum
+	 * @param userPassword
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/result/checkform")
+	public String showCheckForm() {
+	    return "result/deleteform";
 	}
 	
-	@PostMapping(value="/update/{receiptNum}/{userPassword}")
+	@GetMapping(value="result/update/{receiptNum}/{userPassword}")
+	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model) {
+		model.addAttribute("newReceipt", marathonService.getNewReceipt(receiptNum, userPassword));
+		return "result/updateform";
+	}
+	
+	@PostMapping(value="result/update/{receiptNum}/{userPassword}")
 	public String updateReceipt(Receipt newReceipt,@PathVariable int receiptNum, @PathVariable String userPassword, RedirectAttributes model) {
 		try {
 			marathonService.updateReceipt(newReceipt, receiptNum);
@@ -76,9 +97,15 @@ public class MarathonController {
 		} catch (RuntimeException e) {
 			model.addFlashAttribute("message", e.getMessage());
 		}
-		return "redirect:/";
+		return "redirect:/list";
 	}
 	
+	/**
+	 * @author 김다린
+	 * @param marathonId
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/{marathonId}")
 	public String getMarathonInfo(@PathVariable int marathonId, Model model) {
 		Marathon marathon=marathonService.getMarathonInfo(marathonId);
@@ -94,6 +121,11 @@ public class MarathonController {
 		return "marathon/index";
 	}
 	
+	/**
+	 * @author 김민성
+	 * @param model
+	 * @return
+	 */
 	@GetMapping(value="/result/delete")
 	public String deleteMarathon(Model model) {
 	    return "result/deleteform";
@@ -110,6 +142,25 @@ public class MarathonController {
 	        int delete = marathonService.deleteMarathon(rcpnum, userpassword);
 	        if(delete > 0){
 	            redAttr.addFlashAttribute("message", "접수번호 [" + rcpnum + "] 신청이 취소되었습니다.");
+	            return "redirect:/result/deleteform";
+	        }else{
+	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
+	            return "/result/deleteform";
+	        }
+	    }catch(Exception e){
+	        redAttr.addFlashAttribute("message", "삭제 중 오류가 발생했습니다: " + e.getMessage());
+	        return "redirect:/result/deleteform";
+	    }
+	}
+	
+	@GetMapping("/result/delete/{receiptNum}/{userPassword}")
+	@PostMapping(value="/result/delete/{receiptNum}/{userPassword}")
+	public String deleteMarathon(@PathVariable int receiptNum, @PathVariable String userPassword,
+	                             RedirectAttributes redAttr, Model model){
+	    try{
+	        int delete = marathonService.deleteMarathon(receiptNum, userPassword);
+	        if(delete > 0){
+	            redAttr.addFlashAttribute("message", "접수번호 [" + receiptNum + "] 신청이 취소되었습니다.");
 	            return "redirect:/result/deleteform";
 	        }else{
 	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");

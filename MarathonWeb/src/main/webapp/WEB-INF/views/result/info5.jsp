@@ -18,7 +18,7 @@ function handleSubmit(actionType) {
     var selectedValue = checkboxes[0].value;
     var passwordValue = passwordInput.value;
     
-    var baseURL = "/marathon/result";
+    var baseURL = "/result";
     var actionURL;
     if (actionType === 'update') {
         // 수정 페이지로 이동하는 URL에서 쿼리 스트링 대신 경로의 일부로 비밀번호 포함
@@ -37,13 +37,14 @@ function handleSubmit(actionType) {
 
 <body>
 <h2>신청 정보들 조회</h2>
-<form action="/marathon/result/info5" method="post">
-<p>이름<input type="text" name="userName"></p>
-<p>전화번호<input type="text" name="phoneNum"></p><br>
-<input type="submit" value="검색">
+<form action="/result/info5" method="post">
+	<p>이름<input type="text" name="userName"></p>
+	<p>전화번호<input type="text" name="phoneNum"></p><br>
+	<input type="submit" value="검색">
 </form>
-<c:forEach var="receipt" items="${receipts}">
 <form id="form" action="" method="get">
+<c:forEach var="receipt" items="${receipts}">
+
 <table border="1">
  <tr>
  	<td> <input type="checkbox" name="receiptNum" value="${receipt.receiptNum}"> 아이템  ${receipt.receiptNum}</td>
