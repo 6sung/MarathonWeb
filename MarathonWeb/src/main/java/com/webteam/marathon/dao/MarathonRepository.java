@@ -52,8 +52,8 @@ public class MarathonRepository implements IMarathonRepository{
 	@Override
 	public Receipt getReceiptInfoNum(int receiptNum) {
 		String sql = "SELECT receipt_num, user_name, phone_num, user_add, "
-				+ " user_email, user_birth, marathon_id, user_password "
-				+ " FROM receipt WHERE receipt_num=?";
+				+ "user_email, user_birth, marathon_id, user_password "
+				+ "FROM receipt WHERE receipt_num=?";
 		return jdbcTemplate.queryForObject(sql, new RcpMapper(), receiptNum);
 
 	}
@@ -85,10 +85,18 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public Receipt getReceiptInfo(String userName, String phoneNum) {
+	public List<Receipt> getReceiptInfo(String userName, String phoneNum) {
 		String sql = "SELECT receipt_num, user_name, phone_num, user_add, "
 				+ " user_email, user_birth, marathon_id, user_password "
 				+ " FROM receipt WHERE user_name=? AND phone_num=?";
-		return jdbcTemplate.queryForObject(sql, new RcpMapper(), userName, phoneNum);
+		return jdbcTemplate.query(sql, new RcpMapper(), userName, phoneNum);
+	}
+
+	@Override
+	public List<Receipt> getAllReceiptInfo() {
+		String sql = "SELECT receipt_num, user_name, phone_num, user_add, "
+				+ " user_email, user_birth, marathon_id, user_password "
+				+ " FROM receipt ORDER BY receipt_num";
+		return jdbcTemplate.query(sql, new RcpMapper());
 	}
 }

@@ -15,7 +15,8 @@ public interface IMarathonRepository {
 	// 접수 내역 조회
 	Receipt getReceiptInfoNum(int receiptNum);
 	// 접수 내역 조회
-	Receipt getReceiptInfo(String userName, String phoneNum);
+	List<Receipt> getReceiptInfo(String userName, String phoneNum);
+	List<Receipt> getAllReceiptInfo();
 	
 	// 접수하기
 	void insertMarathon(Marathon marathon);

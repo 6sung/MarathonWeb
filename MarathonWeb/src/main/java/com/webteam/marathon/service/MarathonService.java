@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.webteam.marathon.dao.IMarathonRepository;
-import com.webteam.marathon.dao.MarathonRepository;
 import com.webteam.marathon.dto.Marathon;
 import com.webteam.marathon.dto.Receipt;
 
@@ -59,8 +58,13 @@ public class MarathonService implements IMarathonService{
 	}
 
 	@Override
-	public Receipt getReceiptInfo(String userName, String phoneNum) {
+	public List<Receipt> getReceiptInfo(String userName, String phoneNum) {
 		return marathonRepository.getReceiptInfo(userName, phoneNum);
+	}
+
+	@Override
+	public List<Receipt> getAllReceiptInfo() {
+		return marathonRepository.getAllReceiptInfo();
 	}
 	
 	
