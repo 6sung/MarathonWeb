@@ -26,7 +26,7 @@ public class MarathonController {
 		model.addAttribute("marathon", marathon);
 		return "marathon/view";
 	}
-	//테스트 시 http://localhost:8080/marathon/marform/list 로 입력
+	//테스트 시 http://localhost:8080/marathon/list 로 입력
 	//마라톤 리스트가 출력됩니다.
 	@GetMapping("/list")
 	public String getAllMarathon(Model model) {
