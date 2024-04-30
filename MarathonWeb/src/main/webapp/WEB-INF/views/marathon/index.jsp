@@ -1,4 +1,5 @@
 <%@page import="com.webteam.marathon.dto.Marathon"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,7 +11,7 @@
 <title>Test</title>
 </head>
 <body>
-<%--<h1>마라톤 테스트용 조회</h1>
+<%-- <h1>마라톤 테스트용 조회</h1>
 <p>마라톤 아이디와 이름이 뜹니다
 <table>
 <c:forEach var="marathon" items="${marathonList}">
@@ -48,7 +49,7 @@
 	</div>
 </section>
 
-<div class="album py-5 bg-light">
+<div class="album py-5">
 	<div class="container">
 	<div class="row">
 	<c:forEach var="marathon" items="${marathonList}">
@@ -58,7 +59,7 @@
 				  <div class="card-body">
 				    <h5 class="card-title"><strong>${marathon.marathonName}</strong></h5>
 				    <p class="card-text">${marathon.marathonDate}</p>
-				    <a href="insert?marathonId=${marathon.marathonId}" class="btn btn-success">접수하기</a>
+				    <a href="receipt/insert?marathonId=${marathon.marathonId}" class="btn btn-success">접수하기</a>
 
 				  </div>
 				</div>
@@ -68,7 +69,7 @@
 	</div>
 </div>
 
-${message}
+
 
 </body>
 </html>

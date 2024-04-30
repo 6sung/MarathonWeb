@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>접수 조회</title>
+<jsp:include page="../marathon/nav.jsp" />
 <link rel="stylesheet" href="../css/deletebox.css"/>
 </head>
 <body>
