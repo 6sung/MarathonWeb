@@ -29,7 +29,7 @@ public class MarathonRepository implements IMarathonRepository{
 			rcp.setPhoneNum(rs.getString("phone_num"));
 			rcp.setUserAdd(rs.getString("user_add"));
 			rcp.setUserEmail(rs.getString("user_email"));
-			rcp.setUserBirth(rs.getString("user_birth"));
+			rcp.setUserBirth(rs.getDate("user_birth"));
 			rcp.setMarathonId(rs.getInt("marathon_id"));
 			rcp.setUserPassword(rs.getString("user_password"));
 			return rcp;
@@ -125,7 +125,7 @@ public class MarathonRepository implements IMarathonRepository{
 				newReceipt.setPhoneNum(rs.getString("phone_num"));
 				newReceipt.setUserAdd(rs.getString("user_add"));
 				newReceipt.setUserEmail(rs.getString("user_email"));
-				newReceipt.setUserBirth(rs.getString("user_birth"));
+				newReceipt.setUserBirth(rs.getDate("user_birth"));
 				return newReceipt;
 			}
 			

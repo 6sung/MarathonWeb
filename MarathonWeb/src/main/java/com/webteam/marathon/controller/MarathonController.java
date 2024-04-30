@@ -28,8 +28,10 @@ public class MarathonController {
 	 * @return
 	 */
 	@GetMapping("/receipt/insert")
-	public String insertReceipt(Model model) {
-		model.addAttribute("marathonList", marathonService.getMarathonList());
+	public String insertReceipt(int marathonId ,Model model) {
+		model.addAttribute("marathon", marathonService.getMarathonInfo(marathonId));
+		System.out.println(marathonService.getMarathonInfo(marathonId));
+		
 		System.out.println("1번");
 		return "receipt/insert";
 	}
@@ -46,7 +48,7 @@ public class MarathonController {
 				e.printStackTrace();
 				System.out.println("3번");
 			}
-			return "redirect:/receipt/insert";
+			return "redirect:/receipt/insert?marathonId="+receipt.getMarathonId();
 	}
 	
 	/**
@@ -54,21 +56,22 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/result/info5")
-	public String getReceiptInfo(Model model) {
-	        return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지 
-	}
-	@PostMapping("/result/info5")
-	public String getReceiptInfo(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "phoneNum", required = false) String phoneNum, Model model) {
-		try {
-		    List<Receipt> receipts = marathonService.getReceiptInfo(userName, phoneNum);
-		    model.addAttribute("receipts", receipts);
-		    return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지
-		} catch (EmptyResultDataAccessException e) {
-		    model.addAttribute("errorMessage", "영수증 정보를 찾을 수 없습니다.");
-		    return "result/noinfo2"; // 오류 메시지를 표시하는 JSP 페이지
-		}
-	}
+	 @GetMapping("/result/info5")
+	 public String getReceiptInfo(Model model) {
+	     return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지 
+	 }
+	 @PostMapping("/result/info5")
+	 public String getReceiptInfo(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "phoneNum", required = false) String phoneNum, Model model) {
+	    try{
+	        List<Receipt> receipts = marathonService.getReceiptInfo(userName, phoneNum);
+	        model.addAttribute("marathonList", marathonService.getMarathonList());
+	        model.addAttribute("receipts", receipts);
+	        return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지
+	    } catch (EmptyResultDataAccessException e) {
+	        model.addAttribute("errorMessage", "영수증 정보를 찾을 수 없습니다.");
+	        return "result/noinfo2"; // 오류 메시지를 표시하는 JSP 페이지
+	    }
+	 }
 	
 	
 	/**
@@ -78,10 +81,19 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/result/checkform")
-	public String showCheckForm() {
-	    return "result/deleteform";
-	}
+	 @GetMapping(value="result/checkform")
+	 public String showCheckForm(@RequestParam("param") String page, Model model) {
+			//RequestParameter를 이용하여 page값을 받아와서 분기 실행
+			if(page.equals("update")) {
+				// checkform.jsp에 form action 경로를 update로 설정
+				model.addAttribute("page", "update");
+				return "result/checkform";
+			}else {
+				// checkform.jsp에 form action 경로를 delete로 설정
+				model.addAttribute("page", "delete");
+				return "result/checkform";
+			}
+	    }
 	
 	@GetMapping(value="result/update/{receiptNum}/{userPassword}")
 	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model) {
@@ -126,14 +138,23 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping(value="/result/delete")
-	public String deleteMarathon(Model model) {
+//	@GetMapping(value="/result/delete")
+//	public String deleteMarathon(Model model) {
+//	    return "result/deleteform";
+//	}
+//	@GetMapping("/result/deleteform")
+//	public String showDeleteForm() {
+//	    return "result/deleteform";
+//	}
+	
+	
+	
+	@GetMapping({"/result/delete", "/result/deleteform"})
+	public String showDeleteForm(Model model) {
+	    // GET 요청에 대한 처리로, 삭제 폼을 보여줍니다.
 	    return "result/deleteform";
 	}
-	@GetMapping("/result/deleteform")
-	public String showDeleteForm() {
-	    return "result/deleteform";
-	}
+	
 	@RequestMapping(value="/result/delete", method = RequestMethod.POST)
 	public String deleteMarathon(@RequestParam(required = true) Integer rcpnum, 
 	                             @RequestParam(required = true) String userpassword, 
@@ -142,7 +163,7 @@ public class MarathonController {
 	        int delete = marathonService.deleteMarathon(rcpnum, userpassword);
 	        if(delete > 0){
 	            redAttr.addFlashAttribute("message", "접수번호 [" + rcpnum + "] 신청이 취소되었습니다.");
-	            return "redirect:/result/deleteform";
+	            return "redirect:/list";
 	        }else{
 	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
 	            return "/result/deleteform";

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>신청 취소</title>
 <link rel="stylesheet" href="../css/deletebox.css"/>
+<jsp:include page="../marathon/nav.jsp" />
 </head>
 <body>
 <script>
@@ -44,4 +45,3 @@ function confirmDelete(form){
 </div>
 </body>
 </html>
-

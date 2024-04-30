@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>신청 정보들 조회</title>
+    <jsp:include page="../marathon/nav.jsp" />
 </head>
 <script>
 function handleSubmit(actionType) {
@@ -18,7 +19,7 @@ function handleSubmit(actionType) {
     var selectedValue = checkboxes[0].value;
     var passwordValue = passwordInput.value;
     
-    var baseURL = "/result";
+    var baseURL = "/marathon/result";
     var actionURL;
     if (actionType === 'update') {
         // 수정 페이지로 이동하는 URL에서 쿼리 스트링 대신 경로의 일부로 비밀번호 포함
@@ -34,29 +35,63 @@ function handleSubmit(actionType) {
     window.location.href = actionURL;
 }
 </script>
+<script>
+$(function(){
+    $('#onDisplay').click(function(){
+	    if($("#noneDiv").css("display") == "none"){
+            $('#noneDiv').show();
+    	}
+    });
+});
+</script>
+<body>
+<!-- 	<h2>신청 정보들 조회</h2>
+	<form action="/marathon/result/info5" method="post">
+	<p>이름<input type="text" name="userName"></p>
+	<p>전화번호<input type="text" name="phoneNum"></p><br>
+	<input type="submit" value="검색">
+	</form> -->
 
 <body>
 <h2>신청 정보들 조회</h2>
 <form action="/result/info5" method="post">
-	<p>이름<input type="text" name="userName"></p>
-	<p>전화번호<input type="text" name="phoneNum"></p><br>
-	<input type="submit" value="검색">
+   <p>이름<input type="text" name="userName"></p>
+   <p>전화번호<input type="text" name="phoneNum"></p><br>
+   <input type="submit" value="검색">
 </form>
 <form id="form" action="" method="get">
+<table border="1">
+<tr>
+   <td><p>접수내역</p></td>
+   <td><p>이름</p></td>
+   <td><p>전화번호</p></td>
+   <td><p>마라톤</p></td>
+</tr>
 <c:forEach var="receipt" items="${receipts}">
 
-<table border="1">
  <tr>
- 	<td> <input type="checkbox" name="receiptNum" value="${receipt.receiptNum}"> 아이템  ${receipt.receiptNum}</td>
- 	<td>${receipt}</td>
+    <td> <input type="checkbox" name="receiptNum" value="${receipt.receiptNum}">  <p>${receipt.receiptNum} 번</p></td>
+    <td><p>${receipt.userName}</p></td>
+    <td><p>${receipt.phoneNum}</p></td>
+    <td>
+        <!-- 마라톤 ID 대신 이름을 찾아서 출력 -->
+        <c:forEach var="marathon" items="${marathonList}">
+            <c:if test="${marathon.marathonId == receipt.marathonId}">
+                <p>${marathon.marathonName}</p>
+            </c:if>
+        </c:forEach>
+    </td>
  </tr>
  <!-- c:forEach 반복 내용 -->
-</table>
+
 </c:forEach>
+</table>
 <input type="password" id="passwordInput" placeholder="비밀번호를 입력하세요">
 <input type="button" value="수정하기" onclick="handleSubmit('update')">
 <input type="button" value="삭제하기" onclick="handleSubmit('delete')">
-
 </form>
+
+
+
 </body>
 </html>
