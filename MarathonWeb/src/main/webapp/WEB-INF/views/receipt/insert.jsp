@@ -37,7 +37,7 @@
 
 			<div class="col-md-6">
 				<img class="card-img-top mb-5 mb-md-0" 
-				src="https://i.ibb.co/LYXdfxc/poster1.png" class="img-fluid" alt="...">
+				src="${marathon.marathonImg}" class="img-fluid" alt="...">
 			</div>
 
 			<div class="col-md-6">

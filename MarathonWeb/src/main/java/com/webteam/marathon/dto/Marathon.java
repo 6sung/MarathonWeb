@@ -12,4 +12,5 @@ public class Marathon {
 	private String marathonName;
 	private int marathonMaximum;
 	private Date marathonDate;
+	private String marathonImg;
 }

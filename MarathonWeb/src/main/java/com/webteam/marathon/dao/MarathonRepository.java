@@ -44,6 +44,7 @@ public class MarathonRepository implements IMarathonRepository{
 			mar.setMarathonName(rs.getString("marathon_name"));
 			mar.setMarathonMaximum(rs.getInt("marathon_maximum"));
 			mar.setMarathonDate(rs.getDate("marathon_date"));
+			mar.setMarathonImg(rs.getString("marathon_img"));
 			return mar;
 		}
 	}
@@ -57,7 +58,7 @@ public class MarathonRepository implements IMarathonRepository{
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
 		String sql= "SELECT marathon_id, marathon_name, marathon_maximum, "
-				+"marathon_date from marathon where marathon_id=?";
+				+"marathon_date, marathon_img from marathon where marathon_id=?";
 		return jdbcTemplate.queryForObject(sql, new MarMapper(),marathonId);
 	}
 
