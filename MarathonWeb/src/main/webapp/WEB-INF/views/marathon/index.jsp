@@ -55,7 +55,7 @@
 	<c:forEach var="marathon" items="${marathonList}">
 					<div class="col-md-4">
 				<div class="card mb-4 shadow-sm" >
-				<img src="https://i.pinimg.com/564x/d1/12/8c/d1128ccc57c4bbcbf328a4683a48c374.jpg" class="card-img-top" alt="...">
+				<img src="${marathon.marathonImg}" class="card-img-top" alt="...">
 				  <div class="card-body">
 				    <h5 class="card-title"><strong>${marathon.marathonName}</strong></h5>
 				    <p class="card-text">${marathon.marathonDate}</p>
