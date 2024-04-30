@@ -41,7 +41,7 @@ public class MarathonController {
 			System.out.println(receipt.toString());
 			try {
 				marathonService.insertReceipt(receipt);
-				redirectAttrs.addFlashAttribute("message", receipt.getUserName() + "님 참가 신청이 완료되었습니다.");
+				redirectAttrs.addFlashAttribute("message", receipt.getUserName() + "님 접수번호 "+receipt.getUserEmail()+"번으로 참가 신청이 완료되었습니다.");
 				System.out.println("2번");
 			}catch(RuntimeException e) {
 				redirectAttrs.addFlashAttribute("message", e.getMessage());

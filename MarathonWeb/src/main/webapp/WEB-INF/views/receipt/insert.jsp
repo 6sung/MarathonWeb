@@ -31,13 +31,21 @@
 </head>
 
 <body>
+<script>
+window.onload = function() {
+    var message = '${message}';
+    if (message) {
+        alert(message);
+    }
+}
+</script>
 <section class="py-5">
 	<div class="container px-4 px-lg-5 my-5">
 		<div class="row gx-4 gx-lg-5 align-items-center">
 
 			<div class="col-md-6">
 				<img class="card-img-top mb-5 mb-md-0" 
-				src="https://i.ibb.co/LYXdfxc/poster1.png" class="img-fluid" alt="...">
+				src="${marathon.marathonImg}" class="img-fluid" alt="...">
 			</div>
 
 			<div class="col-md-6">
@@ -45,7 +53,7 @@
 				<h2>${marathon.marathonName}</h2>
 				</div>
 
-				<form name="my-form"  action="/marathon/receipt/insert" method="post" accept-charset="utf-8">
+				<form name="my-form"  action="/receipt/insert" method="post" accept-charset="utf-8">
 
 
 				<%-- <select class="Marathon_name" aria-label="Disabled select example">
@@ -54,9 +62,9 @@
 					</c:forEach> 
 				</select> --%>
 				<div class="row mb-3">
-				<label for="Marathon_id" class="col-sm-3 col-form-label">마라톤 id</label>
+				<label for="Marathon_id" class="col-sm-3 col-form-label"></label>
 				<div class="col-sm-9">
-				<input type="text" class="form-control" name="marathonId" value="${marathon.marathonId}">
+				<input type="hidden" class="form-control" name="marathonId" value="${marathon.marathonId}">
 				</div>
 				</div>
 
@@ -67,13 +75,13 @@
 				</div>
 				</div>	
 
-				<div class="row mb-3">
+				<!-- <div class="row mb-3">
 				<label for="receipt_num"
 				class="col-sm-3 col-form-label">접수번호</label>
 				<div class="col-sm-9">
 				<input type="text" id="receipt_num" class="form-control" name="receiptNum" required>
 					</div>
-				</div>
+				</div> -->
 
 
 				<div class="row mb-3">
@@ -102,7 +110,7 @@
 				<div class="row mb-3">
 				<label for="user_birth" class="col-sm-3 col-form-label">생년월일</label>
 				<div class="col-sm-9">
-				<input type="text" id="userBirth" class="form-control" name="userBirth">
+				<input type="date" id="userBirth" class="form-control" name="userBirth">
 					</div>
 				</div>
 
@@ -110,8 +118,15 @@
 				<div class="row mb-3">
 				<label for="user_password" class="col-sm-3 col-form-label">비밀번호</label>
 				<div class="col-sm-9">
-				<input type="text" id="user_password" class="form-control" name="userPassword">
+				<input type="password" id="user_password" class="form-control" name="userPassword">
 				</div>
+				</div>
+				
+				<div class="row mb-3">
+    			<label for="confirm_password" class="col-sm-3 col-form-label">비밀번호 확인</label>
+    			<div class="col-sm-9">
+        		<input type="password" id="confirm_password" class="form-control" name="confirmPassword" required>
+    			</div>
 				</div>
 
 				<div class="mb-3">
@@ -134,5 +149,16 @@
 		</div>
 	</div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('form[name="my-form"]').submit(function(e) {
+            if ($('#user_password').val() !== $('#confirm_password').val()) {
+                alert("비밀번호가 일치하지 않습니다.");
+                e.preventDefault(); // 폼 제출을 막습니다.
+            }
+        });
+    });
+</script>
 </body>
 </html>

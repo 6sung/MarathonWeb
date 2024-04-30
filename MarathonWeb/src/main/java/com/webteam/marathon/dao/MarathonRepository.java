@@ -44,6 +44,7 @@ public class MarathonRepository implements IMarathonRepository{
 			mar.setMarathonName(rs.getString("marathon_name"));
 			mar.setMarathonMaximum(rs.getInt("marathon_maximum"));
 			mar.setMarathonDate(rs.getDate("marathon_date"));
+			mar.setMarathonImg(rs.getString("marathon_img"));
 			return mar;
 		}
 	}
@@ -57,7 +58,7 @@ public class MarathonRepository implements IMarathonRepository{
 	@Override
 	public Marathon getMarathonInfo(int marathonId) {
 		String sql= "SELECT marathon_id, marathon_name, marathon_maximum, "
-				+"marathon_date from marathon where marathon_id=?";
+				+"marathon_date, marathon_img from marathon where marathon_id=?";
 		return jdbcTemplate.queryForObject(sql, new MarMapper(),marathonId);
 	}
 
@@ -71,11 +72,11 @@ public class MarathonRepository implements IMarathonRepository{
 
 	@Override
 	public void insertReceipt(Receipt receipt) {
-		String sql = "insert into receipt (RECEIPT_NUM, USER_NAME, PHONE_NUM, USER_ADD, " + 
+		String sql = "insert into receipt (receipt_num, USER_NAME, PHONE_NUM, USER_ADD, " + 
 				"				USER_EMAIL, USER_BIRTH, MARATHON_ID, USER_PASSWORD) " + 
-				"				 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				"				 VALUES (seq_receipt_num.NEXTVAL,?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, 
-				receipt.getReceiptNum(),
+				//receipt.getReceiptNum(),
 				receipt.getUserName(),
 				receipt.getPhoneNum(),
 				receipt.getUserAdd(),

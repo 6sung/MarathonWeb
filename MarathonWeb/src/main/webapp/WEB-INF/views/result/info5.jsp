@@ -19,7 +19,7 @@ function handleSubmit(actionType) {
     var selectedValue = checkboxes[0].value;
     var passwordValue = passwordInput.value;
     
-    var baseURL = "/marathon/result";
+    var baseURL = "/result";
     var actionURL;
     if (actionType === 'update') {
         // 수정 페이지로 이동하는 URL에서 쿼리 스트링 대신 경로의 일부로 비밀번호 포함
