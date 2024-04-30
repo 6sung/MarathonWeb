@@ -14,6 +14,9 @@ import com.webteam.marathon.dto.Marathon;
 import org.springframework.dao.EmptyResultDataAccessException;
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
 import com.webteam.marathon.dto.Receipt;
 import com.webteam.marathon.service.IMarathonService;
 
@@ -78,10 +81,19 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/result/checkform")
-	public String showCheckForm() {
-	    return "result/deleteform";
-	}
+	@GetMapping(value="result/checkform")
+	 public String showCheckForm(@RequestParam("param") String page, Model model) {
+			//RequestParameter를 이용하여 page값을 받아와서 분기 실행
+			if(page.equals("update")) {
+				// checkform.jsp에 form action 경로를 update로 설정
+				model.addAttribute("page", "update");
+				return "result/checkform";
+			}else {
+				// checkform.jsp에 form action 경로를 delete로 설정
+				model.addAttribute("page", "delete");
+				return "result/checkform";
+			}
+	    }
 	
 	@GetMapping(value="result/update/{receiptNum}/{userPassword}")
 	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model) {
@@ -106,7 +118,7 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/{marathonId}")
+	@GetMapping("/marathon/{marathonId}")
 	public String getMarathonInfo(@PathVariable int marathonId, Model model) {
 		Marathon marathon=marathonService.getMarathonInfo(marathonId);
 		model.addAttribute("marathon", marathon);

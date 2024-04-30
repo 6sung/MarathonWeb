@@ -35,12 +35,10 @@ crossorigin="anonymous">
 		        <a class="nav-link" href="./insert">입력</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link " href="./update">
-		        	수정
-		        </a>
+				<a class="nav-link" href="./result/checkform?param=update">수정</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="./result/delete" tabindex="-1" aria-disabled="true">접수취소</a>
+		        <a class="nav-link" href="./result/checkform?param=delete" tabindex="-1" aria-disabled="true">접수취소</a>
 		      </li>
 		    </ul>
 		    <form class="form-inline my-2 my-lg-0">

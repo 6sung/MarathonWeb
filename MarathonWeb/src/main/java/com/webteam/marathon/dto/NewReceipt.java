@@ -14,5 +14,5 @@ public class NewReceipt {
 	private String phoneNum;
 	private String userAdd;
 	private String userEmail;
-	private String userBirth;
+	private Date userBirth;
 }
