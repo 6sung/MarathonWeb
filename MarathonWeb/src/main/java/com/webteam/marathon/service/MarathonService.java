@@ -53,4 +53,9 @@ public class MarathonService implements IMarathonService{
 	public void updateReceipt(Receipt newReceipt, int receiptNum) {
 		marathonRepository.updateReceipt(newReceipt, receiptNum);
 	}
+
+	@Override
+	public List<Marathon> searchMarathonByName(String searchKeyword) {
+		return marathonRepository.searchMarathonByName(searchKeyword);
+	}
 }

@@ -27,4 +27,7 @@ public interface IMarathonService {
 		
 		// 접수 내역 삭제
 		int deleteMarathon(int receiptNum, String userPassword);
+		
+		// 대회 검색 목록 가져오기
+		List<Marathon> searchMarathonByName(String searchKeyword);
 }

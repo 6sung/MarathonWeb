@@ -53,17 +53,16 @@
 	<div class="container">
 	<div class="row">
 	<c:forEach var="marathon" items="${marathonList}">
-					<div class="col-md-4">
-				<div class="card mb-4 shadow-sm" >
-				<img src="${marathon.marathonImg}" class="card-img-top" alt="...">
-				  <div class="card-body">
-				    <h5 class="card-title"><strong>${marathon.marathonName}</strong></h5>
-				    <p class="card-text">${marathon.marathonDate}</p>
-				    <a href="receipt/insert?marathonId=${marathon.marathonId}" class="btn btn-success">접수하기</a>
-
-				  </div>
-				</div>
+		<div class="col-md-4">
+			<div class="card mb-4 shadow-sm" >
+			<img src="${marathon.marathonImg}" class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <h5 class="card-title"><strong>${marathon.marathonName}</strong></h5>
+			    <p class="card-text">${marathon.marathonDate}</p>
+			    <a href="receipt/insert?marathonId=${marathon.marathonId}" class="btn btn-success">접수하기</a>
+			  </div>
 			</div>
+		</div>
 	</c:forEach>
 	</div>
 	</div>

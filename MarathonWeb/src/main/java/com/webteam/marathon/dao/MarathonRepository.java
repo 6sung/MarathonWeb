@@ -132,4 +132,10 @@ public class MarathonRepository implements IMarathonRepository{
 			
 		}, receiptNum, userPassword);
 	}
+
+	@Override
+	public List<Marathon> searchMarathonByName(String searchKeyword) {
+	    String sql = "SELECT * FROM marathon WHERE marathon_name LIKE '%' || ? || '%'";
+		return jdbcTemplate.query(sql, new MarMapper(), searchKeyword);
+	}
 }

@@ -81,6 +81,7 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
+
 	 @GetMapping(value="result/checkform")
 	 public String showCheckForm(@RequestParam("param") String page, Model model) {
 			//RequestParameter를 이용하여 page값을 받아와서 분기 실행
@@ -126,11 +127,24 @@ public class MarathonController {
 	}
 	//테스트 시 http://localhost:8080/marathon/list 로 입력
 	//마라톤 리스트가 출력됩니다.
-	@GetMapping("/list")
+/*	@GetMapping("/list")
 	public String getAllMarathon(Model model) {
 		List<Marathon> marathonList=marathonService.getMarathonList();
 		model.addAttribute("marathonList",marathonList);
 		return "marathon/index";
+	}*/
+	
+	// 검색창에 입력한  값이 있으면 해당 값과 일치하는 마라톤 리스트 출력
+	@GetMapping("/list")
+	public String getSearchedMarathon(@RequestParam(name = "searchKeyword", required = false) String searchKeyword, Model model) {
+		List<Marathon> marathonList;
+		if (searchKeyword != null && !searchKeyword.isEmpty()) {
+			marathonList = marathonService.searchMarathonByName(searchKeyword);
+		}else {
+	        marathonList = marathonService.getMarathonList();
+	    }
+	    model.addAttribute("marathonList", marathonList);
+	    return "marathon/index";
 	}
 	
 	/**
