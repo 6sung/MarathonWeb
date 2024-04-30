@@ -141,9 +141,6 @@ window.onload = function() {
 
 
 				<button type="submit" class="btn btn-primary">제출</button>
-				<div class="mb-3">
-					${message}
-				</div>
 				</form>
 			</div>
 		</div>

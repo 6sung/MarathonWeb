@@ -132,4 +132,17 @@ public class MarathonRepository implements IMarathonRepository{
 			
 		}, receiptNum, userPassword);
 	}
+
+	@Override
+	public int searchReceiptNum() {
+		String sql = "select Max(receipt_num) from receipt";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+	
+
+	@Override
+	public List<Marathon> searchMarathonByName(String searchKeyword) {
+	    String sql = "SELECT * FROM marathon WHERE marathon_name LIKE '%' || ? || '%'";
+		return jdbcTemplate.query(sql, new MarMapper(), searchKeyword);
+	}
 }
