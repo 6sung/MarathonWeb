@@ -10,9 +10,6 @@ public interface IMarathonRepository {
 	// 마라톤 대회 목록 가져오기
 	List<Marathon> getMarathonList();
 	
-	// 마라톤 대회 검색목록 가져오기
-	List<Marathon> searchMarathonByName(String searchKeyword);
-	
 	// 대회 상세정보 가져오기
 	Marathon getMarathonInfo(int marathonId);
 	
@@ -29,11 +26,10 @@ public interface IMarathonRepository {
 	// 접수 내역 삭제
 	int deleteMarathon(int receiptNum, String userPassword);
 	
+	// 마라톤 대회 검색목록 가져오기
+	List<Marathon> searchMarathonByName(String searchKeyword);
+	
 	int searchReceiptNum();
 	
 	boolean isValidReceipt(int receiptNum, String userPassword);
-
-	
-	
-	
 }

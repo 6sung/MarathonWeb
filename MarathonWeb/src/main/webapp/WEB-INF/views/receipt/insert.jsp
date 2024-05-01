@@ -1,19 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- <link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
----- Include the above in your HEAD tag --------
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,7 +12,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600"
 		rel="stylesheet" type="text/css">
 
-	<link rel="icon" href="Favicon.png">
+	<!-- <link rel="icon" href="Favicon.png"> -->
 	<title>Insert Form</title>
 </head>
 
@@ -74,16 +60,7 @@ window.onload = function() {
 				<input type="text" id="user_name" class="form-control"name="userName" required >
 				</div>
 				</div>	
-
-				<!-- <div class="row mb-3">
-				<label for="receipt_num"
-				class="col-sm-3 col-form-label">접수번호</label>
-				<div class="col-sm-9">
-				<input type="text" id="receipt_num" class="form-control" name="receiptNum" required>
-					</div>
-				</div> -->
-
-
+				
 				<div class="row mb-3">
 				<label for="user_email"
 				class="col-sm-3 col-form-label">이메일</label>
@@ -122,14 +99,14 @@ window.onload = function() {
 				<input type="password" id="user_password" class="form-control" name="userPassword" maxlength="6" required >
 				</div>
 				</div>
-				
+
 				<div class="row mb-3">
     			<label for="confirm_password" class="col-sm-3 col-form-label" style="padding-right: 0">비밀번호 확인<span style="color:#ff6b6b"><strong>*</strong></span></label>
     			<div class="col-sm-9">
         		<input type="password" id="confirm_password" class="form-control" name="confirmPassword" maxlength="6" required>
     			</div>
 				</div>
-
+				
 				<div class="row mb-3 d-flex justify-content-end">
     			<label style="padding-left: 0"><span style="color:#ff6b6b"><strong>*</strong></span>
     				   <span style="color:#418cff;">필수 입력 값 입니다.</span>
@@ -154,20 +131,6 @@ window.onload = function() {
 		</div>
 	</div>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script>
-    $(document).ready(function() {
-        $('form[name="my-form"]').submit(function(e) {
-            if ($('#user_password').val() !== $('#confirm_password').val()) {
-                alert("비밀번호가 일치하지 않습니다.");
-                e.preventDefault(); // 폼 제출을 막습니다.
-            }
-        });
-    });
-</script> -->
-
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
-
-
-
 </html>

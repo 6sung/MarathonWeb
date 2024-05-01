@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Marafom</title>
+<title>ModuRunner</title>
 <jsp:include page="../marathon/nav.jsp" />
 </head>
 <body>

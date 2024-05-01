@@ -1,5 +1,4 @@
 package com.webteam.marathon.exception;
-
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class PageExceptionHandler {
@@ -8,5 +7,5 @@ public class PageExceptionHandler {
         e.printStackTrace();
         return "error";
     }
-    
+
 }
