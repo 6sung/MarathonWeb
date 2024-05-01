@@ -11,17 +11,14 @@
 <title>Test</title>
 </head>
 <body>
-<%-- <h1>마라톤 테스트용 조회</h1>
-<p>마라톤 아이디와 이름이 뜹니다
-<table>
-<c:forEach var="marathon" items="${marathonList}">
-<tr>
-	<td>${marathon.marathonId}</td>
-	<td>${marathon.marathonName}</td>
-</tr>
-</c:forEach>
-</table> --%>
-
+<script>
+window.onload = function() {
+    var message = '${message}';
+    if (message) {
+        alert(message);
+    }
+}
+</script>
 <!-- 상단 바 -->
 <section>
 	<div class="container">
@@ -53,7 +50,7 @@
 	<div class="container">
 	<div class="row">
 	<c:forEach var="marathon" items="${marathonList}">
-		<div class="col-md-4">
+				<div class="col-md-4">
 			<div class="card mb-4 shadow-sm" >
 			<img src="${marathon.marathonImg}" class="card-img-top" alt="...">
 			  <div class="card-body">
@@ -61,6 +58,7 @@
 			    <p class="card-text">${marathon.marathonDate}</p>
 			    <a href="receipt/insert?marathonId=${marathon.marathonId}" class="btn btn-success">접수하기</a>
 			  </div>
+			</div>
 			</div>
 		</div>
 	</c:forEach>

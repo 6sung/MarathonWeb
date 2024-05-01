@@ -16,7 +16,7 @@ crossorigin="anonymous">
 <!-- datepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
 
-<title>test narbar</title>
+<title>Marafom</title>
 
 <!--nav bar-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">

@@ -18,7 +18,6 @@ public interface IMarathonRepository {
 	
 	// 접수 내역 조회
 	List<Receipt> getReceiptInfo(String userName, String phoneNum);
-	//List<Receipt> getAllReceiptInfo();
 	
 	// 접수하기
 	void insertReceipt(Receipt receipt);
@@ -29,6 +28,11 @@ public interface IMarathonRepository {
 	
 	// 접수 내역 삭제
 	int deleteMarathon(int receiptNum, String userPassword);
+	
+	int searchReceiptNum();
+	
+	// 마라톤 대회 검색목록 가져오기
+	List<Marathon> searchMarathonByName(String searchKeyword);
 
 	boolean isValidReceipt(int receiptNum, String userPassword);
 
