@@ -32,8 +32,6 @@ public interface IMarathonService {
 		
 		// 대회 검색 목록 가져오기
 		List<Marathon> searchMarathonByName(String searchKeyword);
-		// 대회 검색 목록 가져오기
-		List<Marathon> searchMarathonByName(String searchKeyword);
 
         boolean isValidReceipt(int receiptNum, String userPassword);
 }

@@ -55,11 +55,6 @@ public class MarathonService implements IMarathonService{
 	}
 
 	@Override
-	public List<Marathon> searchMarathonByName(String searchKeyword) {
-		return marathonRepository.searchMarathonByName(searchKeyword);
-	}
-
-	@Override
 	public boolean isValidReceipt(int receiptNum, String userPassword) {
 		return marathonRepository.isValidReceipt(receiptNum, userPassword);
 	}
