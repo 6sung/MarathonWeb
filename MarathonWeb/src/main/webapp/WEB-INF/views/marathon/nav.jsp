@@ -68,8 +68,8 @@ div{
 		      </li>
 		    </ul>
 		    <form class="form-inline my-2 my-lg-0" action="../list" method="GET">
-		      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-		      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+		      <input class="form-control mr-sm-2" type="search" placeholder="대회를 검색해보세요!" aria-label="Search" name="searchKeyword">
+		      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
 		    </form>
 		  </div>
 	  </div>

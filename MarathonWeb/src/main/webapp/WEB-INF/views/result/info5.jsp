@@ -75,7 +75,7 @@ $(function(){
             <div class="row mb-3">
                <label for="user_add" class="col-sm-3 col-form-label">전화번호</label>
                <div class="col-sm-9">
-                  <input type="text" class="form-control" name="phoneNum">
+                  <input type="text" class="form-control" name="phoneNum" placeholder="010-0000-0000">
                </div>
             </div>
             <input type="submit" class="btn btn-primary" value="검색">

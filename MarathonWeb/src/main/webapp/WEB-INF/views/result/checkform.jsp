@@ -17,7 +17,7 @@
 	<form action="./update" method="post">
 	  접수 번호  <input type="text" name="rcpnum" required><p>
 	  비밀번호  <input type="password" name="userpassword" required><p>
-	  <input type="button" value="확인" onclick="return confirmUpdate(this.form)">
+	  <input type="button" value="확인" onclick="confirmUpdate(this.form)">
 	</form>
 	<!-- 알림창을 표시하는 스크립트 -->
 <% if (request.getAttribute("message") != null) { %>
@@ -41,6 +41,7 @@
 		}
 	}
 	</script>
+	
  <% } else if ("delete".equals(request.getParameter("param"))) { %>
 	
 	<h2>Delete Form</h2>
