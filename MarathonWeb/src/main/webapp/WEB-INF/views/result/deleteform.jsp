@@ -18,12 +18,12 @@ window.onload = function() {
 }
 </script>
 <div class="container_deletebox">
-<h2>마라톤 접수 취소</h2>
+<h2>접수 취소</h2>
 <div class="form-container">
 <form action="./delete" method="post">
   접수 번호  <input type="text" name="rcpnum" required><p>
   비밀번호  <input type="password" name="userpassword" required><p>
-  <input type="button" value="접수 취소" onclick="return confirmDelete(this.form)">
+ <input type="button" style="background-color:#0d6efd" value="접수 취소" onclick="return confirmDelete(this.form)">
 </form>
 <script>
 function confirmDelete(form){

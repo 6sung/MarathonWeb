@@ -67,7 +67,6 @@ public class MarathonService implements IMarathonService{
 	
 	@Override
 	public int searchReceiptNum() {
-		// TODO Auto-generated method stub
 		return marathonRepository.searchReceiptNum();
 	}
 }

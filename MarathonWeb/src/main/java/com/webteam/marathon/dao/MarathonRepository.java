@@ -136,8 +136,32 @@ public class MarathonRepository implements IMarathonRepository{
 
 	@Override
 	public List<Marathon> searchMarathonByName(String searchKeyword) {
-	    String sql = "SELECT * FROM marathon WHERE marathon_name LIKE '%' || ? || '%'";
-		return jdbcTemplate.query(sql, new MarMapper(), searchKeyword);
+		 // 사용자 입력이 비어있거나 띄어쓰기로만 이루어진 경우 처리
+		if (searchKeyword == null || searchKeyword.trim().isEmpty()) {
+          String sql = "select * from marathon";
+          return jdbcTemplate.query(sql, new MarMapper());
+		}
+
+		// 사용자 입력을 공백 기준으로 분리
+		String[] searchWords = searchKeyword.split("\\s+");
+		StringBuilder sql = new StringBuilder("SELECT * FROM marathon WHERE ");
+
+		// 동적으로 쿼리문 구성
+		for (int i = 0; i < searchWords.length; i++) {
+			sql.append("marathon_name LIKE ?");
+			if (i < searchWords.length - 1) {
+				sql.append(" OR "); // 또는 AND를 사용할 수 있습니다.
+			}
+		}
+
+		// 검색어에 % 추가된 상태에서의 검색어 준비
+		Object[] params = new Object[searchWords.length];
+		for (int i = 0; i < searchWords.length; i++) {
+			params[i] = "%" + searchWords[i] + "%";
+		}
+
+		// 동적으로 구성된 SQL 문자열과 파라미터를 사용하여 쿼리 실행
+		return jdbcTemplate.query(sql.toString(), new MarMapper(), params);
 	}
 
 	@Override

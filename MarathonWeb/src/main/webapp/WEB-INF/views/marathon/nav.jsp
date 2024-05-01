@@ -48,30 +48,30 @@ div{
 <title>ModuRunner</title>
 
 <!--nav bar-->
-	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="backdrop-filter: blur(30px); background-color: rgba(244, 244, 244, 0.5);">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="backdrop-filter: blur(30px); background-color: rgba(244, 244, 244, 0.5);">
 	<div class="container d-flex justify-content-between">
-		  <a class="navbar-brand" href="/list">ModuRunner</a>
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
+		<a class="navbar-brand" href="/list">ModuRunner</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item">
-		        <a class="nav-link" href="/result/info5">조회 <span class="sr-only">(current)</span></a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="/result/checkform?param=update">수정</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="/result/checkform?param=delete" tabindex="-1" aria-disabled="true">접수취소</a>
-		      </li>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+		    	<li class="nav-item">
+		        	<a class="nav-link" href="/result/info5">접수조회 <span class="sr-only">(current)</span></a>
+		      	</li>
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="/result/checkform?param=update">접수수정</a>
+		      	</li>
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="/result/checkform?param=delete" tabindex="-1" aria-disabled="true">접수취소</a>
+		      	</li>
 		    </ul>
 		    <form class="form-inline my-2 my-lg-0" action="../list" method="GET">
-		      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-		      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+		    	<input class="form-control mr-sm-2" type="search" placeholder="대회를 검색해보세요!" aria-label="Search" name="searchKeyword">
+		    	<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
 		    </form>
-		  </div>
-	  </div>
-	</nav>
+		</div>
+	</div>
+</nav>
 </head>

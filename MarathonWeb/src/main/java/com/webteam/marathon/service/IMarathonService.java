@@ -7,30 +7,30 @@ import com.webteam.marathon.dto.Receipt;
 
 public interface IMarathonService {
 	// 마라톤 대회 목록 가져오기
-		List<Marathon> getMarathonList();
+	List<Marathon> getMarathonList();
 		
-		// 대회 상세정보 가져오기
-		Marathon getMarathonInfo(int marathonId);
+	// 대회 상세정보 가져오기
+	Marathon getMarathonInfo(int marathonId);
 		
-		// 접수 내역 조회
-		List<Receipt> getReceiptInfo(String userName, String phoneNum);
+	// 접수 내역 조회
+	List<Receipt> getReceiptInfo(String userName, String phoneNum);
 		
-		// 접수하기
-		void insertReceipt(Receipt receipt);
+	// 접수하기
+	void insertReceipt(Receipt receipt);
 		
-		// 접수 내역 수정 페이지
-		NewReceipt getNewReceipt(int receiptNum, String userPassword);
+	// 접수 내역 수정 페이지
+	NewReceipt getNewReceipt(int receiptNum, String userPassword);
 		
-		// 접수 내역 수정 
-		int updateReceipt(Receipt newReceipt, int receiptNum);
+	// 접수 내역 수정 
+	int updateReceipt(Receipt newReceipt, int receiptNum);
 		
-		int searchReceiptNum();
+	int searchReceiptNum();
 		
-		// 접수 내역 삭제
-		int deleteMarathon(int receiptNum, String userPassword);
+	// 접수 내역 삭제
+	int deleteMarathon(int receiptNum, String userPassword);
 		
-		// 대회 검색 목록 가져오기
-		List<Marathon> searchMarathonByName(String searchKeyword);
+	// 대회 검색 목록 가져오기
+	List<Marathon> searchMarathonByName(String searchKeyword);
 		
-		boolean isValidReceipt(int receiptNum, String userPassword);
+	boolean isValidReceipt(int receiptNum, String userPassword);
 }

@@ -40,9 +40,9 @@
 		</div>
 
 		<div class="row mb-3">
-		<label for="phone_num"class="col-sm-3 col-form-label">이름</label>
+		<label for="phone_num"class="col-sm-3 col-form-label">이름<span style="color:#ff6b6b"><strong>*</strong></span></label>
 		<div class="col-sm-9">
-		<input type="text" class="form-control" name="userName" value="${newReceipt.userName}">
+		<input type="text" class="form-control" name="userName" value="${newReceipt.userName}" required>
 		</div>
 		</div>
 		
@@ -54,9 +54,9 @@
 		</div>
 		
 		<div class="row mb-3">
-		<label for="user_add" class="col-sm-3 col-form-label">전화번호</label>
+		<label for="user_add" class="col-sm-3 col-form-label">전화번호<span style="color:#ff6b6b"><strong>*</strong></span></label>
 		<div class="col-sm-9">
-		<input type="text" class="form-control" name="phoneNum" value="${newReceipt.phoneNum}">
+		<input type="text" class="form-control" name="phoneNum" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-0000-0000" value="${newReceipt.phoneNum}" required>
 		</div>
 		</div>
 
@@ -68,14 +68,22 @@
 		</div>
 		
 		<div class="row mb-3">
-		<label for="user_password" class="col-sm-3 col-form-label">생년월일</label>
+		<label for="user_password" class="col-sm-3 col-form-label">생년월일<span style="color:#ff6b6b"><strong>*</strong></span></label>
 		<div class="col-sm-9">
-		<input type="date" class="form-control" name="userBirth" value="${newReceipt.userBirth}">
+		<input type="date" class="form-control" name="userBirth" value="${newReceipt.userBirth}" required>
 		</div>
 		</div>
 
+		<div class="row mb-3 d-flex justify-content-end">
+			<label style="padding-left: 0"><span style="color:#ff6b6b"><strong>*</strong></span>
+				   <span style="color:#418cff;">필수 입력 값 입니다.</span>
+			</label>
+		<div class="col-sm-9">
+		
+		<p></p>
+		<div class="row mb-3 d-flex justify-content-end">
 		<input type="submit" class="btn btn-success" value="수정">
-		<input type="reset" class="btn btn-outline-success" value="취소">
+		</div>
 	</form>
 </div>
 </div>

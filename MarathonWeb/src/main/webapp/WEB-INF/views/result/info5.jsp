@@ -63,8 +63,8 @@ $(function(){
    <div class="row gx-4 gx-lg-5 align-items-center">
       <div class="col-lg-8 col-md-10 mx-auto">
          <h1>접수 조회</h1>
-         신청시 작성하신 이름과 전화번호를 입력해주시면 해당 접수내역이 조회됩니다.<p>
-         <form action="/result/info5" method="post">
+         	신청시 작성하신 이름과 전화번호를 입력해주시면 해당 접수내역이 조회됩니다.<p>
+         	<form action="/result/info5" method="post">
             <div class="row mb-3">
                <label for="phone_num"class="col-sm-3 col-form-label">이름</label>
                <div class="col-sm-9">
@@ -73,13 +73,13 @@ $(function(){
             </div>
 
             <div class="row mb-3">
-               <label for="user_add" class="col-sm-3 col-form-label">전화번호</label>
-               <div class="col-sm-9">
-                  <input type="text" class="form-control" name="phoneNum">
-               </div>
-            </div>
+            	<label for="user_add" class="col-sm-3 col-form-label">전화번호</label>
+            	<div class="col-sm-9">
+            		<input type="text" class="form-control" name="phoneNum">
+            	</div>
+           	</div>
             <input type="submit" class="btn btn-primary" value="검색">
-         </form>
+      	</form>
       </div>
    </div>
 </div>
