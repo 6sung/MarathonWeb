@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>신청 정보들 조회</title>
+    <title>ModuRunner</title>
     <jsp:include page="../marathon/nav.jsp" />
 </head>
 <script>
@@ -58,14 +58,6 @@ $(function(){
 });
 </script>
 <body>
-<!--    <h2>신청 정보들 조회</h2>
-   <form action="/marathon/result/info5" method="post">
-   <p>이름<input type="text" name="userName"></p>
-   <p>전화번호<input type="text" name="phoneNum"></p><br>
-   <input type="submit" value="검색">
-   </form> -->
-
-<body>
 <section class="py-5">
 <div class="container px-4 px-lg-5 my-5">
    <div class="row gx-4 gx-lg-5 align-items-center">
@@ -86,7 +78,7 @@ $(function(){
                   <input type="text" class="form-control" name="phoneNum">
                </div>
             </div>
-            <input type="submit" class="btn btn-success" value="검색">
+            <input type="submit" class="btn btn-primary" value="검색">
          </form>
       </div>
    </div>
@@ -131,8 +123,8 @@ $(function(){
    <input class="form-control" type="password" id="passwordInput" placeholder="비밀번호를 입력하세요">
    </div>
    <div class="col-3">
-   <input class="btn btn-outline-success" type="button" value="수정하기" onclick="handleSubmit('update')">
-   <input class="btn btn-outline-success" type="button" value="삭제하기" onclick="handleSubmit('delete')">
+    <input class="btn btn-primary" type="button" value="수정하기" onclick="handleSubmit('update')">
+	<input class="btn btn-primary" type="button" value="삭제하기" onclick="handleSubmit('delete')">
    </div>
    </div>
    </form>

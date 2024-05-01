@@ -22,14 +22,15 @@ public interface IMarathonService {
 		NewReceipt getNewReceipt(int receiptNum, String userPassword);
 		
 		// 접수 내역 수정 
-		void updateReceipt(Receipt newReceipt, int receiptNum);
+		int updateReceipt(Receipt newReceipt, int receiptNum);
 		
+		int searchReceiptNum();
 		
 		// 접수 내역 삭제
 		int deleteMarathon(int receiptNum, String userPassword);
 		
-		int searchReceiptNum();
-		
 		// 대회 검색 목록 가져오기
 		List<Marathon> searchMarathonByName(String searchKeyword);
+		
+		boolean isValidReceipt(int receiptNum, String userPassword);
 }

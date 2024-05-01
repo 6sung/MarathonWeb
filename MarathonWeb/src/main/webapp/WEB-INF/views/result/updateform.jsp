@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Marafom</title>
+<title>ModuRunner</title>
 <jsp:include page="../marathon/nav.jsp" />
 </head>
 <body>
@@ -16,7 +16,7 @@
 	<h1>접수내역 수정</h1>
 	<form action="./update" method="post">
 		<div class="row mb-3">																						
-		<label for="user_name" class="col-sm-3 col-form-label">마라톤 대회이름</label>
+		<label for="user_name" class="col-sm-3 col-form-label">대회명</label>
 		<div class="col-sm-9">
 		<input type="text" class="form-control"name="marathonName" value="${newReceipt.marathonName}" disabled>
 		</div>
@@ -45,7 +45,14 @@
 		<input type="text" class="form-control" name="userName" value="${newReceipt.userName}">
 		</div>
 		</div>
-
+		
+		<div class="row mb-3">
+		<label for="user_password" class="col-sm-3 col-form-label">이메일</label>
+		<div class="col-sm-9">
+		<input type="text" class="form-control" name="userEmail" value="${newReceipt.userEmail}">
+		</div>
+		</div>
+		
 		<div class="row mb-3">
 		<label for="user_add" class="col-sm-3 col-form-label">전화번호</label>
 		<div class="col-sm-9">
@@ -53,26 +60,17 @@
 		</div>
 		</div>
 
-
 		<div class="row mb-3">
-		<label for="user_birth" class="col-sm-3 col-form-label">주소</label>
+		<label for="user_birth" class="col-sm-3 col-form-label">집주소</label>
 		<div class="col-sm-9">
 		<input type="text" class="form-control" name="userAdd" value="${newReceipt.userAdd}">
 			</div>
 		</div>
-
-
-		<div class="row mb-3">
-		<label for="user_password" class="col-sm-3 col-form-label">이메일</label>
-		<div class="col-sm-9">
-		<input type="text" class="form-control" name="userEmail" value="${newReceipt.userEmail}">
-		</div>
-		</div>
-
+		
 		<div class="row mb-3">
 		<label for="user_password" class="col-sm-3 col-form-label">생년월일</label>
 		<div class="col-sm-9">
-		<input type="text" class="form-control" name="userBirth" value="${newReceipt.userBirth}">
+		<input type="date" class="form-control" name="userBirth" value="${newReceipt.userBirth}">
 		</div>
 		</div>
 

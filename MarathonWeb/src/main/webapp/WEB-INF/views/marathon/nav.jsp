@@ -16,19 +16,48 @@ crossorigin="anonymous">
 <!-- datepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"></script>
 
-<title>Marafom</title>
+<style type="text/css">
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+.navbar-brand{
+	font-family: 'Pretendard-Regular';
+	font-weight: 800;
+}
+.nav-link{
+	font-family: 'Pretendard-Regular';
+	font-weight: 300;
+}
+h1{
+	font-family: 'Pretendard-Regular';
+	font-weight: 800;
+}
+h2{
+	font-family: 'Pretendard-Regular';
+	font-weight: 700;
+}
+div{
+	font-family: 'Pretendard-Regular';
+	font-weight: 300;
+}
+</style>
+
+<title>ModuRunner</title>
 
 <!--nav bar-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="backdrop-filter: blur(30px); background-color: rgba(244, 244, 244, 0.5);">
 	<div class="container d-flex justify-content-between">
-		  <a class="navbar-brand" href="/list">MaraFom</a>
+		  <a class="navbar-brand" href="/list">ModuRunner</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
 
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    <ul class="navbar-nav mr-auto">
-		      <li class="nav-item active">
+		      <li class="nav-item">
 		        <a class="nav-link" href="/result/info5">조회 <span class="sr-only">(current)</span></a>
 		      </li>
 		      <li class="nav-item">
@@ -39,8 +68,8 @@ crossorigin="anonymous">
 		      </li>
 		    </ul>
 		    <form class="form-inline my-2 my-lg-0" action="../list" method="GET">
-		      <input class="form-control mr-sm-2" type="search" placeholder="대회를 검색해보세요!" aria-label="Search" name="searchKeyword">
-		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+		      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
 		    </form>
 		  </div>
 	  </div>

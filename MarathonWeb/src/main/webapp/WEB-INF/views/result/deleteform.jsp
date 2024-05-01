@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신청 취소</title>
+<title>ModuRunner</title>
 <link rel="stylesheet" href="../css/deletebox.css"/>
 <jsp:include page="../marathon/nav.jsp" />
 </head>
@@ -29,10 +29,10 @@ window.onload = function() {
 function confirmDelete(form){
 	var rcpnum = form.rcpnum.value.trim();
 	var userpassword = form.userpassword.value.trim();
-	if(rcpnum === '' || userpassword === ''){
+	/*if(rcpnum === '' || userpassword === ''){
 		alert("접수 번호와 비밀번호를 모두 입력해주세요.");
 		return false;
-	}
+	}*/
 	if(confirm("정말 삭제하시겠습니까?")){
 	   form.submit();
 	   return true;

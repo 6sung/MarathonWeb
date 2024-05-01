@@ -50,18 +50,24 @@ public class MarathonService implements IMarathonService{
 	}
 	
 	@Override
-	public void updateReceipt(Receipt newReceipt, int receiptNum) {
-		marathonRepository.updateReceipt(newReceipt, receiptNum);
+	public int updateReceipt(Receipt newReceipt, int receiptNum) {
+		return marathonRepository.updateReceipt(newReceipt, receiptNum);
 	}
 
-	@Override
-	public int searchReceiptNum() {
-		// TODO Auto-generated method stub
-		return marathonRepository.searchReceiptNum();
-	}
 	
 	@Override
 	public List<Marathon> searchMarathonByName(String searchKeyword) {
 		return marathonRepository.searchMarathonByName(searchKeyword);
+	}
+	
+	@Override
+	public boolean isValidReceipt(int receiptNum, String userPassword) {
+		return marathonRepository.isValidReceipt(receiptNum, userPassword);
+	}
+	
+	@Override
+	public int searchReceiptNum() {
+		// TODO Auto-generated method stub
+		return marathonRepository.searchReceiptNum();
 	}
 }

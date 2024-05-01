@@ -20,14 +20,16 @@ public interface IMarathonRepository {
 	void insertReceipt(Receipt receipt);
 	
 	// 접수 내역 수정 
-	void updateReceipt(Receipt newReceipt, int receiptNum);
+	int updateReceipt(Receipt newReceipt, int receiptNum);
 	NewReceipt getNewReceipt(int receiptNum, String userPassword);
 	
 	// 접수 내역 삭제
 	int deleteMarathon(int receiptNum, String userPassword);
 	
-	int searchReceiptNum();
-	
 	// 마라톤 대회 검색목록 가져오기
 	List<Marathon> searchMarathonByName(String searchKeyword);
+	
+	int searchReceiptNum();
+	
+	boolean isValidReceipt(int receiptNum, String userPassword);
 }

@@ -22,6 +22,7 @@ public class MarathonRepository implements IMarathonRepository{
 	private class RcpMapper implements RowMapper<Receipt>{
 		@Override
 		public Receipt mapRow(ResultSet rs, int rowNum) throws SQLException {
+			// TODO Auto-generated method stub
 			Receipt rcp = new Receipt();
 			rcp.setReceiptNum(rs.getInt("receipt_num"));
 			rcp.setUserName(rs.getString("user_name"));
@@ -71,10 +72,12 @@ public class MarathonRepository implements IMarathonRepository{
 
 	@Override
 	public void insertReceipt(Receipt receipt) {
+
 		String sql = "insert into receipt (receipt_num, USER_NAME, PHONE_NUM, USER_ADD, " + 
 				"				USER_EMAIL, USER_BIRTH, MARATHON_ID, USER_PASSWORD) " + 
 				"				 VALUES (seq_receipt_num.NEXTVAL,?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, 
+				//receipt.getReceiptNum(),
 				receipt.getUserName(),
 				receipt.getPhoneNum(),
 				receipt.getUserAdd(),
@@ -86,17 +89,20 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public void updateReceipt(Receipt newReceipt, int receiptNum) {
+	public int updateReceipt(Receipt newReceipt, int receiptNum) {
 		String sql = "UPDATE receipt SET user_name=?, phone_num=?, user_add=?, user_email=?, "
 				+ "user_birth=? WHERE receipt_num= ?";
-		jdbcTemplate.update(sql, 
+		return jdbcTemplate.update(sql, 
 				newReceipt.getUserName(), newReceipt.getPhoneNum(), newReceipt.getUserAdd(),
 				newReceipt.getUserEmail(), newReceipt.getUserBirth(), receiptNum);
 	}
 
 	@Override
 	public int deleteMarathon(int receiptNum, String userPassword) {
+		//String sql = "delete from employees where employee_id=? and email=?";
+		//String sql = "select * from receipt where receipt_num=? and user_password=?";
 		String sql = "DELETE FROM receipt WHERE receipt_num=? AND user_password=?";
+		//return receiptNum;
 		return jdbcTemplate.update(sql,receiptNum,userPassword);
 	}
 
@@ -112,6 +118,7 @@ public class MarathonRepository implements IMarathonRepository{
 
 			@Override
 			public NewReceipt mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// TODO Auto-generated method stub
 				NewReceipt newReceipt = new NewReceipt();
 				newReceipt.setMarathonName(rs.getString("marathon_name"));
 				newReceipt.setMarathonDate(rs.getDate("marathon_date"));
@@ -128,15 +135,21 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public int searchReceiptNum() {
-		String sql = "select Max(receipt_num) from receipt";
-		return jdbcTemplate.queryForObject(sql, Integer.class);
-	}
-	
-
-	@Override
 	public List<Marathon> searchMarathonByName(String searchKeyword) {
 	    String sql = "SELECT * FROM marathon WHERE marathon_name LIKE '%' || ? || '%'";
 		return jdbcTemplate.query(sql, new MarMapper(), searchKeyword);
 	}
+
+	@Override
+	public boolean isValidReceipt(int receiptNum, String userPassword) {
+		String sql = "SELECT COUNT(*) FROM receipt WHERE receipt_num=? AND user_password=?";
+		return jdbcTemplate.queryForObject(sql, Integer.class, receiptNum, userPassword) == 1;
+	}
+	
+	@Override
+	public int searchReceiptNum() {
+		String sql = "select Max(receipt_num) from receipt";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+
 }

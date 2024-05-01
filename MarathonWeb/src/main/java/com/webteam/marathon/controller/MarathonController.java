@@ -72,43 +72,53 @@ public class MarathonController {
 	 }
 	
 	
-	/**
-	 * @author 표기두
-	 * @param receiptNum
-	 * @param userPassword
-	 * @param model
-	 * @return
-	 */
-	 @GetMapping(value="result/checkform")
-	 public String showCheckForm(@RequestParam("param") String page, Model model) {
-			//RequestParameter를 이용하여 page값을 받아와서 분기 실행
-			if(page.equals("update")) {
-				// checkform.jsp에 form action 경로를 update로 설정
-				model.addAttribute("page", "update");
-				return "result/checkform";
-			}else {
-				// checkform.jsp에 form action 경로를 delete로 설정
-				model.addAttribute("page", "delete");
-				return "result/checkform";
+	 /**
+		 * @author 표기두
+		 * @param receiptNum
+		 * @param userPassword
+		 * @param model
+		 * @return
+		 */
+
+		 @GetMapping(value="result/checkform")
+		 public String showCheckForm(@RequestParam("param") String page, Model model) {
+				//RequestParameter를 이용하여 page값을 받아와서 분기 실행
+				if(page.equals("update")) {
+					// checkform.jsp에 form action 경로를 update로 설정
+					model.addAttribute("page", "update");
+					return "result/checkform";
+				}else {
+					// checkform.jsp에 form action 경로를 delete로 설정
+					model.addAttribute("page", "delete");
+					return "result/checkform";
+				}
+		    }
+		
+		@GetMapping(value="result/update/{receiptNum}/{userPassword}")
+		public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model, RedirectAttributes redAttr) {
+			if (!isValid(receiptNum, userPassword)) {
+				redAttr.addFlashAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
+				return "redirect:/result/checkform?param=update"; // 에러 페이지로 리다이렉트하거나 이동합니다.
 			}
-	    }
-	
-	@GetMapping(value="result/update/{receiptNum}/{userPassword}")
-	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model) {
-		model.addAttribute("newReceipt", marathonService.getNewReceipt(receiptNum, userPassword));
-		return "result/updateform";
-	}
-	
-	@PostMapping(value="result/update/{receiptNum}/{userPassword}")
-	public String updateReceipt(Receipt newReceipt,@PathVariable int receiptNum, @PathVariable String userPassword, RedirectAttributes model) {
-		try {
-			marathonService.updateReceipt(newReceipt, receiptNum);
-			model.addFlashAttribute("message", "접수 내역이 수정되었습니다");
-		} catch (RuntimeException e) {
-			model.addFlashAttribute("message", e.getMessage());
+			model.addAttribute("newReceipt", marathonService.getNewReceipt(receiptNum, userPassword));
+			return "result/updateform";
 		}
-		return "redirect:/list";
-	}
+
+		private boolean isValid(int receiptNum, String userPassword) {
+			// receiptNum과 userPassword를 데이터베이스와 비교하여 유효한지 확인할 수 있습니다.
+			return marathonService.isValidReceipt(receiptNum, userPassword);
+		}
+		
+		@PostMapping(value="result/update/{receiptNum}/{userPassword}")
+		public String updateReceipt(Receipt newReceipt,@PathVariable int receiptNum, @PathVariable String userPassword, RedirectAttributes model) {
+			try {
+				marathonService.updateReceipt(newReceipt, receiptNum);
+				model.addFlashAttribute("message", "접수 내역이 수정되었습니다");
+			} catch (RuntimeException e) {
+				model.addFlashAttribute("message", "접수 내역을 수정할 수 없습니다");
+			}
+			return "redirect:/list";
+		}
 	
 	/**
 	 * @author 김다린
@@ -158,9 +168,9 @@ public class MarathonController {
 	        }else{
 	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
 	            return "/result/deleteform";
-	        }
+	        } 
 	    }catch(Exception e){
-	        redAttr.addFlashAttribute("message", "삭제 중 오류가 발생했습니다: " + e.getMessage());
+	        redAttr.addFlashAttribute("message", "접수 내역을 삭제할 수 없습니다: /n" + e.getMessage());
 	        return "redirect:/result/deleteform";
 	    }
 	}
@@ -173,7 +183,7 @@ public class MarathonController {
 	        int delete = marathonService.deleteMarathon(receiptNum, userPassword);
 	        if(delete > 0){
 	            redAttr.addFlashAttribute("message", "접수번호 [" + receiptNum + "] 신청이 취소되었습니다.");
-	            return "redirect:/result/deleteform";
+	            return "redirect:/list";
 	        }else{
 	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
 	            return "/result/info5";
