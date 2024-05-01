@@ -31,25 +31,22 @@ public class MarathonController {
 	public String insertReceipt(int marathonId ,Model model) {
 		model.addAttribute("marathon", marathonService.getMarathonInfo(marathonId));
 		System.out.println(marathonService.getMarathonInfo(marathonId));
-		//System.out.println("1번");
 		return "receipt/insert";
 	}
 
 	@PostMapping(value="/receipt/insert")
 	public String insertReceipt(Receipt receipt, RedirectAttributes redirectAttrs) {
-	System.out.println(receipt.toString());
-	try {
-	marathonService.insertReceipt(receipt);
-	int rcpnum = marathonService.searchReceiptNum();
-	redirectAttrs.addFlashAttribute("message", receipt.getUserName() + "님 접수번호 " + rcpnum 	 + "번으로 참가 신청이 완료되었습니다.");
-	redirectAttrs.addAttribute("receiptNum", receipt.getReceiptNum());
-	//System.out.println("2번");
-	} catch(RuntimeException e) {
-	redirectAttrs.addFlashAttribute("message", e.getMessage());
-	e.printStackTrace();
-	//System.out.println("3번");
-	}
-	return "redirect:/receipt/insert?marathonId=" + receipt.getMarathonId();
+		System.out.println(receipt.toString());
+		try {
+				marathonService.insertReceipt(receipt);
+				int rcpnum = marathonService.searchReceiptNum();
+				redirectAttrs.addFlashAttribute("message", receipt.getUserName() + "님 접수번호 " + rcpnum 	 + "번으로 참가 신청이 완료되었습니다.");
+				redirectAttrs.addAttribute("receiptNum", receipt.getReceiptNum());
+		} catch(RuntimeException e) {
+			redirectAttrs.addFlashAttribute("message", e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/receipt/insert?marathonId=" + receipt.getMarathonId();
 	} 
 	
 	/**
@@ -125,15 +122,6 @@ public class MarathonController {
 		model.addAttribute("marathon", marathon);
 		return "marathon/view";
 	}
-	//테스트 시 http://localhost:8080/marathon/list 로 입력
-	//마라톤 리스트가 출력됩니다.
-	/*@GetMapping("/list")
-	public String getAllMarathon(Model model) {
-		List<Marathon> marathonList=marathonService.getMarathonList();
-		model.addAttribute("marathonList",marathonList);
-		return "marathon/index";
-	}*/
-	// 검색창에 입력한  값이 있으면 해당 값과 일치하는 마라톤 리스트 출력
 	@GetMapping("/list")
 	public String getSearchedMarathon(@RequestParam(name = "searchKeyword", required = false) String searchKeyword, Model model) {
 		List<Marathon> marathonList;
@@ -151,16 +139,6 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
-//	@GetMapping(value="/result/delete")
-//	public String deleteMarathon(Model model) {
-//	    return "result/deleteform";
-//	}
-//	@GetMapping("/result/deleteform")
-//	public String showDeleteForm() {
-//	    return "result/deleteform";
-//	}
-	
-	
 	
 	@GetMapping({"/result/delete", "/result/deleteform"})
 	public String showDeleteForm(Model model) {

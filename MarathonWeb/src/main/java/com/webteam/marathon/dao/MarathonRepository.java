@@ -22,7 +22,6 @@ public class MarathonRepository implements IMarathonRepository{
 	private class RcpMapper implements RowMapper<Receipt>{
 		@Override
 		public Receipt mapRow(ResultSet rs, int rowNum) throws SQLException {
-			// TODO Auto-generated method stub
 			Receipt rcp = new Receipt();
 			rcp.setReceiptNum(rs.getInt("receipt_num"));
 			rcp.setUserName(rs.getString("user_name"));
@@ -76,7 +75,6 @@ public class MarathonRepository implements IMarathonRepository{
 				"				USER_EMAIL, USER_BIRTH, MARATHON_ID, USER_PASSWORD) " + 
 				"				 VALUES (seq_receipt_num.NEXTVAL,?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, 
-				//receipt.getReceiptNum(),
 				receipt.getUserName(),
 				receipt.getPhoneNum(),
 				receipt.getUserAdd(),
@@ -98,10 +96,7 @@ public class MarathonRepository implements IMarathonRepository{
 
 	@Override
 	public int deleteMarathon(int receiptNum, String userPassword) {
-		//String sql = "delete from employees where employee_id=? and email=?";
-		//String sql = "select * from receipt where receipt_num=? and user_password=?";
 		String sql = "DELETE FROM receipt WHERE receipt_num=? AND user_password=?";
-		//return receiptNum;
 		return jdbcTemplate.update(sql,receiptNum,userPassword);
 	}
 
@@ -117,7 +112,6 @@ public class MarathonRepository implements IMarathonRepository{
 
 			@Override
 			public NewReceipt mapRow(ResultSet rs, int rowNum) throws SQLException {
-				// TODO Auto-generated method stub
 				NewReceipt newReceipt = new NewReceipt();
 				newReceipt.setMarathonName(rs.getString("marathon_name"));
 				newReceipt.setMarathonDate(rs.getDate("marathon_date"));

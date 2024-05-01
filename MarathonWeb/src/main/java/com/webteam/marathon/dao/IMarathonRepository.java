@@ -15,7 +15,6 @@ public interface IMarathonRepository {
 	
 	// 접수 내역 조회
 	List<Receipt> getReceiptInfo(String userName, String phoneNum);
-	//List<Receipt> getAllReceiptInfo();
 	
 	// 접수하기
 	void insertReceipt(Receipt receipt);
