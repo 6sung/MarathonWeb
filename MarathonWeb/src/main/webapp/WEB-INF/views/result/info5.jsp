@@ -73,7 +73,7 @@ $(function(){
 						<input type="text" class="form-control" name="phoneNum">
 					</div>
 				</div>
-				<input type="submit" class="btn btn-success" value="검색">
+				<input type="submit" class="btn btn-primary" value="검색">
 			</form>
 		</div>
 	</div>
@@ -116,8 +116,8 @@ $(function(){
 	<input class="form-control" type="password" id="passwordInput" placeholder="비밀번호를 입력하세요">
 	</div>
 	<div class="col-3">
-	<input class="btn btn-outline-success" type="button" value="수정하기" onclick="handleSubmit('update')">
-	<input class="btn btn-outline-success" type="button" value="삭제하기" onclick="handleSubmit('delete')">
+	<input class="btn btn-primary" type="button" value="수정하기" onclick="handleSubmit('update')">
+	<input class="btn btn-primary" type="button" value="삭제하기" onclick="handleSubmit('delete')">
 	</div>
 	</div>
 	</form>

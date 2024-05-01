@@ -26,7 +26,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600"
 		rel="stylesheet" type="text/css">
 
-	<link rel="icon" href="Favicon.png">
+	<!-- <link rel="icon" href="Favicon.png"> -->
 	<title>Insert Form</title>
 </head>
 
