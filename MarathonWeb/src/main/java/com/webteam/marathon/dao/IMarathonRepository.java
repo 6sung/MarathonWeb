@@ -24,11 +24,15 @@ public interface IMarathonRepository {
 	void insertReceipt(Receipt receipt);
 	
 	// 접수 내역 수정 
-	void updateReceipt(Receipt newReceipt, int receiptNum);
+	int updateReceipt(Receipt newReceipt, int receiptNum);
 	NewReceipt getNewReceipt(int receiptNum, String userPassword);
 	
 	// 접수 내역 삭제
 	int deleteMarathon(int receiptNum, String userPassword);
+
+	boolean isValidReceipt(int receiptNum, String userPassword);
+
+	
 	
 	
 }

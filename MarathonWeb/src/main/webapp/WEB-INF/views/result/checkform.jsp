@@ -19,14 +19,20 @@
 	  비밀번호  <input type="password" name="userpassword" required><p>
 	  <input type="button" value="확인" onclick="return confirmUpdate(this.form)">
 	</form>
+	<!-- 알림창을 표시하는 스크립트 -->
+<% if (request.getAttribute("message") != null) { %>
+    <script>
+        alert("${message}");
+    </script>
+<% } %>
 	<script>
 	function confirmUpdate(form){
 		var rcpnum = form.rcpnum.value.trim();
 		var userpassword = form.userpassword.value.trim();
 		if(rcpnum === '' || userpassword === ''){
-			alert("접수 번호와 비밀번호를 모두 입력해주세요.");
-			return false;
-		}
+				alert("접수 번호와 비밀번호를 모두 입력해주세요.");
+				return false;
+			}
 		if(confirm("수정하시겠습니까?")){
 			window.location.href = "./update/" + rcpnum + "/" + userpassword;
 		   return true;
@@ -62,6 +68,14 @@
  <% } %>
 </div>
 </div>
-</body>
+<!-- <script>
+	window.onload = function() {
+		var message = '${message}';
+		if (message) {
+			alert(message);
+		}
+	}
+</script> -->
+
 </body>
 </html>

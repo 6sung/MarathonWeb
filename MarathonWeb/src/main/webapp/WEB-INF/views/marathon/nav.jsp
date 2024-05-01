@@ -38,7 +38,7 @@ crossorigin="anonymous">
 		        <a class="nav-link" href="/result/checkform?param=delete" tabindex="-1" aria-disabled="true">접수취소</a>
 		      </li>
 		    </ul>
-		    <form class="form-inline my-2 my-lg-0" action="list" method="GET">
+		    <form class="form-inline my-2 my-lg-0" action="../list" method="GET">
 		      <input class="form-control mr-sm-2" type="search" placeholder="대회를 검색해보세요!" aria-label="Search" name="searchKeyword">
 		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 		    </form>

@@ -68,7 +68,14 @@
 	</div>
 </div>
 
-
+<script>
+	window.onload = function() {
+		var message = '${message}';
+		if (message) {
+			alert(message);
+		}
+	}
+</script>
 
 </body>
 </html>

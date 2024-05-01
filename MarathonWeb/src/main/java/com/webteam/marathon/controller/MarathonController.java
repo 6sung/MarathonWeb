@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webteam.marathon.dto.Marathon;
 import org.springframework.dao.EmptyResultDataAccessException;
+
 import java.util.List;
 
 import com.webteam.marathon.dto.Receipt;
@@ -41,7 +42,8 @@ public class MarathonController {
 			System.out.println(receipt.toString());
 			try {
 				marathonService.insertReceipt(receipt);
-				redirectAttrs.addFlashAttribute("message", receipt.getUserName() + "님 접수번호 "+receipt.getUserEmail()+"번으로 참가 신청이 완료되었습니다.");
+				int message = receipt.getReceiptNum();
+				redirectAttrs.addFlashAttribute("message", receipt.getUserName() + "님 접수번호 "+message+"번으로 참가 신청이 완료되었습니다.");
 				System.out.println("2번");
 			}catch(RuntimeException e) {
 				redirectAttrs.addFlashAttribute("message", e.getMessage());
@@ -97,9 +99,21 @@ public class MarathonController {
 	    }
 	
 	@GetMapping(value="result/update/{receiptNum}/{userPassword}")
-	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model) {
+	public String updateReceipt(@PathVariable int receiptNum, @PathVariable String userPassword, Model model, RedirectAttributes redAttr) {
+		//  model.addAttribute("newReceipt", marathonService.getNewReceipt(receiptNum, userPassword));
+		//  return "result/updateform";
+		if (!isValid(receiptNum, userPassword)) {
+//			model.addAttribute("param", "update");
+			redAttr.addFlashAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
+			return "redirect:/result/checkform?param=update"; // 에러 페이지로 리다이렉트하거나 이동합니다.
+		}
 		model.addAttribute("newReceipt", marathonService.getNewReceipt(receiptNum, userPassword));
 		return "result/updateform";
+	}
+
+	private boolean isValid(int receiptNum, String userPassword) {
+		// receiptNum과 userPassword를 데이터베이스와 비교하여 유효한지 확인할 수 있습니다.
+		return marathonService.isValidReceipt(receiptNum, userPassword);
 	}
 	
 	@PostMapping(value="result/update/{receiptNum}/{userPassword}")
@@ -108,7 +122,7 @@ public class MarathonController {
 			marathonService.updateReceipt(newReceipt, receiptNum);
 			model.addFlashAttribute("message", "접수 내역이 수정되었습니다");
 		} catch (RuntimeException e) {
-			model.addFlashAttribute("message", e.getMessage());
+			model.addFlashAttribute("message", "접수 내역을 수정할 수 없습니다");
 		}
 		return "redirect:/list";
 	}
@@ -161,8 +175,6 @@ public class MarathonController {
 //	    return "result/deleteform";
 //	}
 	
-	
-	
 	@GetMapping({"/result/delete", "/result/deleteform"})
 	public String showDeleteForm(Model model) {
 	    // GET 요청에 대한 처리로, 삭제 폼을 보여줍니다.
@@ -180,11 +192,11 @@ public class MarathonController {
 	            return "redirect:/list";
 	        }else{
 	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
-	            return "/result/deleteform";
-	        }
+	            return "/result/checkform";
+	        } 
 	    }catch(Exception e){
-	        redAttr.addFlashAttribute("message", "삭제 중 오류가 발생했습니다: " + e.getMessage());
-	        return "redirect:/result/deleteform";
+	        redAttr.addFlashAttribute("message", "접수 내역을 삭제할 수 없습니다: /n" + e.getMessage());
+	        return "redirect:/result/checkform";
 	    }
 	}
 	
@@ -196,14 +208,14 @@ public class MarathonController {
 	        int delete = marathonService.deleteMarathon(receiptNum, userPassword);
 	        if(delete > 0){
 	            redAttr.addFlashAttribute("message", "접수번호 [" + receiptNum + "] 신청이 취소되었습니다.");
-	            return "redirect:/result/deleteform";
+	            return "redirect:/list";
 	        }else{
 	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
-	            return "/result/deleteform";
+	            return "/result/checkform";
 	        }
 	    }catch(Exception e){
 	        redAttr.addFlashAttribute("message", "삭제 중 오류가 발생했습니다: " + e.getMessage());
-	        return "redirect:/result/deleteform";
+	        return "redirect:/result/checkform";
 	    }
 	}
 }

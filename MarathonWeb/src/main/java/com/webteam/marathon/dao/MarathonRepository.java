@@ -72,6 +72,7 @@ public class MarathonRepository implements IMarathonRepository{
 
 	@Override
 	public void insertReceipt(Receipt receipt) {
+
 		String sql = "insert into receipt (receipt_num, USER_NAME, PHONE_NUM, USER_ADD, " + 
 				"				USER_EMAIL, USER_BIRTH, MARATHON_ID, USER_PASSWORD) " + 
 				"				 VALUES (seq_receipt_num.NEXTVAL,?, ?, ?, ?, ?, ?, ?)";
@@ -88,10 +89,10 @@ public class MarathonRepository implements IMarathonRepository{
 	}
 
 	@Override
-	public void updateReceipt(Receipt newReceipt, int receiptNum) {
+	public int updateReceipt(Receipt newReceipt, int receiptNum) {
 		String sql = "UPDATE receipt SET user_name=?, phone_num=?, user_add=?, user_email=?, "
 				+ "user_birth=? WHERE receipt_num= ?";
-		jdbcTemplate.update(sql, 
+		return jdbcTemplate.update(sql, 
 				newReceipt.getUserName(), newReceipt.getPhoneNum(), newReceipt.getUserAdd(),
 				newReceipt.getUserEmail(), newReceipt.getUserBirth(), receiptNum);
 	}
@@ -137,5 +138,11 @@ public class MarathonRepository implements IMarathonRepository{
 	public List<Marathon> searchMarathonByName(String searchKeyword) {
 	    String sql = "SELECT * FROM marathon WHERE marathon_name LIKE '%' || ? || '%'";
 		return jdbcTemplate.query(sql, new MarMapper(), searchKeyword);
+	}
+
+	@Override
+	public boolean isValidReceipt(int receiptNum, String userPassword) {
+		String sql = "SELECT COUNT(*) FROM receipt WHERE receipt_num=? AND user_password=?";
+		return jdbcTemplate.queryForObject(sql, Integer.class, receiptNum, userPassword) == 1;
 	}
 }
