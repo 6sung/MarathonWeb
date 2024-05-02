@@ -13,7 +13,7 @@
 		rel="stylesheet" type="text/css">
 
 	<!-- <link rel="icon" href="Favicon.png"> -->
-	<title>Insert Form</title>
+	<title>Modurun</title>
 </head>
 
 <body>
@@ -41,12 +41,6 @@ window.onload = function() {
 
 				<form name="my-form"  action="/receipt/insert" method="post" accept-charset="utf-8">
 
-
-				<%-- <select class="Marathon_name" aria-label="Disabled select example">
-				<c:forEach var="marathon" items="${marathonList}">
-					<option value="${marathon.marathonId}">${marathon.marathonName}</option>"
-					</c:forEach> 
-				</select> --%>
 				<div class="row mb-3">
 				<label for="Marathon_id" class="col-sm-3 col-form-label"></label>
 				<div class="col-sm-9">
@@ -132,5 +126,15 @@ window.onload = function() {
 	</div>
 </section>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script>
+    $(document).ready(function() {
+        $('form[name="my-form"]').submit(function(e) {
+            if ($('#user_password').val() !== $('#confirm_password').val()) {
+                alert("비밀번호가 일치하지 않습니다.");
+                e.preventDefault(); // 폼 제출을 막습니다.
+            }
+        });
+    });
+</script>
 </body>
 </html>

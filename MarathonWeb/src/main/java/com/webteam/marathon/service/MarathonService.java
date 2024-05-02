@@ -40,7 +40,6 @@ public class MarathonService implements IMarathonService{
 
 	@Override
 	public void insertReceipt(Receipt receipt) {
-		//System.out.println("4번");
 		marathonRepository.insertReceipt(receipt);
 	}
 

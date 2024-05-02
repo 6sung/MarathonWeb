@@ -45,12 +45,12 @@ div{
 }
 </style>
 
-<title>ModuRunner</title>
+<title>ModuRun</title>
 
 <!--nav bar-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="backdrop-filter: blur(30px); background-color: rgba(244, 244, 244, 0.5);">
 	<div class="container d-flex justify-content-between">
-		<a class="navbar-brand" href="/list">ModuRunner</a>
+		<a class="navbar-brand" href="/list"><img src="/resources/images/logo.png" style="width: 150px; height: auto;"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -58,7 +58,7 @@ div{
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 		    	<li class="nav-item">
-		        	<a class="nav-link" href="/result/info5">접수조회 <span class="sr-only">(current)</span></a>
+		        	<a class="nav-link" href="/result/info">접수조회 <span class="sr-only">(current)</span></a>
 		      	</li>
 		      	<li class="nav-item">
 		        	<a class="nav-link" href="/result/checkform?param=update">접수수정</a>

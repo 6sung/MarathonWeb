@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>ModuRunner</title>
+    <title>ModuRun</title>
     <jsp:include page="../marathon/nav.jsp" />
 </head>
 <script>
@@ -64,7 +64,7 @@ $(function(){
       <div class="col-lg-8 col-md-10 mx-auto">
          <h1>접수 조회</h1>
          	신청시 작성하신 이름과 전화번호를 입력해주시면 해당 접수내역이 조회됩니다.<p>
-         	<form action="/result/info5" method="post">
+         	<form action="/result/info" method="post">
             <div class="row mb-3">
                <label for="phone_num"class="col-sm-3 col-form-label">이름</label>
                <div class="col-sm-9">
@@ -75,7 +75,7 @@ $(function(){
             <div class="row mb-3">
             	<label for="user_add" class="col-sm-3 col-form-label">전화번호</label>
             	<div class="col-sm-9">
-            		<input type="text" class="form-control" name="phoneNum">
+            		<input type="text" class="form-control" name="phoneNum" placeholder="010-XXXX-XXXX">
             	</div>
            	</div>
             <input type="submit" class="btn btn-primary" value="검색">
@@ -124,7 +124,7 @@ $(function(){
    </div>
    <div class="col-3">
     <input class="btn btn-primary" type="button" value="수정하기" onclick="handleSubmit('update')">
-	<input class="btn btn-primary" type="button" value="삭제하기" onclick="handleSubmit('delete')">
+	<input class="btn btn-primary" type="button" value="취소하기" onclick="handleSubmit('delete')">
    </div>
    </div>
    </form>

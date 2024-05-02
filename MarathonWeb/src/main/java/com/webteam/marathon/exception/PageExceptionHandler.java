@@ -21,7 +21,5 @@ public class PageExceptionHandler {
     
     public boolean isValid(int receiptNum, String userPassword) {
 		return marathonService.isValidReceipt(receiptNum, userPassword);
-	}	// receiptNum과 userPassword를 데이터베이스와 비교하여 유효한지 확인할 수 있습니다.
-	
-
+	}
 }

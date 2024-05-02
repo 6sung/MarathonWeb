@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <jsp:include page="../marathon/nav.jsp" />
 <link rel="stylesheet" href="../css/cardimg.css"/>
-<title>ModuRunner</title>
+<title>ModuRun</title>
 </head>
 <body>
 <script>

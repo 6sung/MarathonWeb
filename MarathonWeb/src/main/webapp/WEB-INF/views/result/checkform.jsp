@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ModuRunner</title>
+<title>ModuRun</title>
 <jsp:include page="../marathon/nav.jsp" />
 <link rel="stylesheet" href="../css/deletebox.css"/>
 </head>

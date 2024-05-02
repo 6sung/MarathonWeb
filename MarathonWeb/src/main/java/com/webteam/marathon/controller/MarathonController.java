@@ -57,17 +57,17 @@ public class MarathonController {
 	 * @param model
 	 * @return
 	 */
-	 @GetMapping("/result/info5")
+	 @GetMapping("/result/info")
 	 public String getReceiptInfo(Model model) {
-	     return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지 
+	     return "result/info"; // 영수증 정보를 표시하는 JSP 페이지 
 	 }
-	 @PostMapping("/result/info5")
+	 @PostMapping("/result/info")
 	 public String getReceiptInfo(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "phoneNum", required = false) String phoneNum,RedirectAttributes redAttr, Model model) {
 	    try{
 	        List<Receipt> receipts = marathonService.getReceiptInfo(userName, phoneNum);
 	        model.addAttribute("marathonList", marathonService.getMarathonList());
 	        model.addAttribute("receipts", receipts);
-	        return "result/info5"; // 영수증 정보를 표시하는 JSP 페이지
+	        return "result/info"; // 영수증 정보를 표시하는 JSP 페이지
 	    } catch (Exception e) {
             return pageExceptionHandler.handleException(e, redAttr);
         }
@@ -187,7 +187,7 @@ public class MarathonController {
 	            return "redirect:/list";
 	        }else{
 	            model.addAttribute("message", "접수번호 또는 비밀번호가 다릅니다");
-	            return "/result/info5";
+	            return "/result/info";
 	        }
 	    }catch (Exception e) {
             return pageExceptionHandler.handleException(e, redAttr);
